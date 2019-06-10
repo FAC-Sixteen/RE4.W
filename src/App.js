@@ -6,11 +6,8 @@ function App() {
   const [data, setData] = React.useState(null);
 
   const getData = () => {
-    return fetch(`/.netlify/functions/getData`)
-      .then(result => {
-        console.log(result.json());
-        result.json();
-      })
+    return fetch(`.netlify/functions/getData`)
+      .then(result => result.json())
       .catch("error");
   };
 

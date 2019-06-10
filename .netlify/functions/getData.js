@@ -1,50 +1,32 @@
-import { config } from "dotenv";
+/* eslint-disable */
+const fetch = require("node-fetch");
+const { config } = require("dotenv");
 config();
+
 const key = process.env.AIRTABLE_KEY;
-
-const https = require("https");
-
-const request = url => {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, response => {
-        let allTheData = "";
-        response.on("data", chunk => {
-          allTheData += chunk;
-        });
-        response.on("end", () => {
-          try {
-            resolve(JSON.parse(allTheData));
-          } catch (e) {
-            reject(`There was an error with the JSON`);
-          }
-        });
-      })
-      .on("error", err => reject(`There was an error: ${err}`));
-  });
-};
-
-export async function handler(event, context) {
-  console.log("test");
+exports.handler = async function(event, context) {
   try {
-    const data = await request(
-      `https://api.airtable.com/v0/appkLPDVgr4TwR3lM/Imported%20table?maxRecords=3&view=Grid%20view&api_key=${key}`
-    ).then(res => {
-      if (!res.ok) {
-        const error = new Error("HTTP error");
-        error.status = res.status;
-        throw error;
+    const response = await fetch(
+      `https://api.airtable.com/v0/appkLPDVgr4TwR3lM/Imported%20table?maxRecords=3&view=Grid%20view&api_key=${key}`,
+      {
+        headers: { Accept: "application/json" }
       }
-      return res.json();
-    });
+    );
+    if (!response.ok) {
+      // NOT res.status >= 200 && res.status < 300
+      return { statusCode: response.status, body: response.statusText };
+    }
+    const data = await response.json();
+
     return {
       statusCode: 200,
       body: JSON.stringify(data)
     };
-  } catch (error) {
+  } catch (err) {
+    console.log(err); // output to netlify function log
     return {
-      statusCode: error.status || 500,
-      body: error.message
+      statusCode: 500,
+      body: JSON.stringify(err.message) // Could be a custom message or object i.e. JSON.stringify(err)
     };
   }
-}
+};
