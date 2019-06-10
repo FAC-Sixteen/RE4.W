@@ -1,6 +1,7 @@
 import React from "react"
 import logo from "./logo.svg"
 import "./App.css"
+import Button from "./components/Button"
 
 function App() {
     const [data, setData] = React.useState(null)
@@ -32,6 +33,9 @@ function App() {
                     Learn React
                 </a>
             </header>
+            <main>
+                <Button>Click me!</Button>
+            </main>
         </div>
     )
 }
