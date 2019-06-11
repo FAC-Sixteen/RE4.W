@@ -1,25 +1,28 @@
+
 import React from "react"
 import "./App.css"
 import P5Wrapper from "react-p5-wrapper"
 import sketch from "./utils/sketches/sketch"
+import Button from "./components/Button";
 
 function App() {
     const [result, setResult] = React.useState(false)
     const [data, setData] = React.useState(null)
 
+
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
             .then(result => result.json())
-            .catch("error")
-    }
+            .catch("error");
+    };
 
     const assignData = () => {
         getData().then(result => {
-            setData(result.records[0].fields.Item)
-        })
-    }
+            setData(result.records[0].fields.Item);
+        });
+    };
     // eslint-disable-next-line
-    React.useEffect(() => assignData(), [])
+    React.useEffect(() => assignData(), []);
     return (
         <div className="App">
             <header className="App-header">
@@ -35,8 +38,11 @@ function App() {
                 <div>Result:{result.toString()}</div>
                 <P5Wrapper sketch={sketch} setResult={setResult}></P5Wrapper>
             </header>
+            <main>
+                <Button>Click me!</Button>
+            </main>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
