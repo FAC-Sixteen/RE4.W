@@ -14,7 +14,7 @@
         "react-scripts": "3.0.1",
         "styled-components": "^4.3.1",
         "p5": "^0.8.0",
-        "react-p5-wrapper": "^2.0.0",
+        "react-p5-wrapper": "^2.0.0"
     },
     "scripts": {
         "start": "react-scripts start",
