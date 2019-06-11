@@ -1,14 +1,10 @@
-
-import React from "react"
-import "./App.css"
-import P5Wrapper from "react-p5-wrapper"
-import sketch from "./utils/sketches/sketch"
+import React from "react";
+import "./App.css";
 import Button from "./components/Button";
 
 function App() {
-    const [result, setResult] = React.useState(false)
-    const [data, setData] = React.useState(null)
-
+    const [result, setResult] = React.useState(false);
+    const [data, setData] = React.useState(null);
 
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
@@ -35,8 +31,6 @@ function App() {
                 >
                     Learn React
                 </a>
-                <div>Result:{result.toString()}</div>
-                <P5Wrapper sketch={sketch} setResult={setResult}></P5Wrapper>
             </header>
             <main>
                 <Button>Click me!</Button>
