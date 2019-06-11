@@ -8,20 +8,17 @@
     "husky": "^2.4.0",
     "lint-staged": "^8.2.0",
     "node-fetch": "^2.6.0",
-    "p5": "^0.8.0",
     "prettier": "^1.18.1",
     "react": "^16.8.6",
-    "react-beautiful-dnd": "^11.0.4",
     "react-dnd": "^7.6.0",
     "react-dnd-html5-backend": "^7.6.0",
     "react-dom": "^16.8.6",
-    "react-p5-wrapper": "^2.0.0",
     "react-scripts": "3.0.1",
     "styled-components": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts test --watchAll=false && react-scripts build",
     "format": "prettier --write '**/*.{js,css,md}'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
