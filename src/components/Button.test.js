@@ -1,9 +1,15 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { render, fireEvent } from "@testing-library/react"
-import Button from "./Button"
+import { SmallButton, LargeButton } from "./Button"
 
-test("Button renders", () => {
-    const { getByTestId } = render(<Button />)
-    getByTestId("button")
+test("Small button renders", () => {
+    const { getByTestId } = render(<SmallButton />)
+    getByTestId("small-button")
 })
+
+test("Large button renders", () => {
+    const { getByTestId } = render(<LargeButton />)
+    getByTestId("large-button")
+})
+

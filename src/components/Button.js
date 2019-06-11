@@ -10,17 +10,43 @@ const StyledButton = styled.button`
     padding: 0.5em;
     color: black
     background: white;
-border: 4px solid black;
-box-sizing: border-box;
-border-radius: 3em;
+    border: 4px solid black;
+    box-sizing: border-box;
+    border-radius: 3em;
+    width: ${props => props.length}em;
 `;
 
-const Button = props => {
+const StyledSmallButton = styled(StyledButton)`
+    width: 24rem;
+    @media only screen and (max-width:768px) {
+        width: 8rem;
+      }
+`;
+
+const StyledLargeButton = styled(StyledButton)`
+    width: 32rem;
+    @media only screen and (max-width:768px) {
+        width: 16rem;
+      }
+`;
+
+const SmallButton = props => {
     return (
-        <StyledButton onClick={props.onClick} data-testid="button">
+        <StyledSmallButton onClick={props.onClick} data-testid="small-button">
             {props.children}
-        </StyledButton>
+        </StyledSmallButton>
     );
 };
 
-export default Button;
+const LargeButton = props => {
+    return (
+        <StyledLargeButton onClick={props.onClick} data-testid="large-button">
+            {props.children}
+        </StyledLargeButton>
+    );
+};
+
+export {
+    SmallButton,
+    LargeButton
+};

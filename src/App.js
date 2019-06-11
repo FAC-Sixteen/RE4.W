@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Button from "./components/Button";
+import  { SmallButton, LargeButton } from "./components/Button";
 
 function App() {
     const [data, setData] = React.useState(null);
@@ -34,7 +34,9 @@ function App() {
                 </a>
             </header>
             <main>
-                <Button>Click me!</Button>
+                {/* <SmallButton>Click me!</SmallButton> */}
+                <SmallButton>Click me!</SmallButton>
+                <LargeButton>and me!</LargeButton>
             </main>
         </div>
     );
