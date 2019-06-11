@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
-import  { SmallButton, LargeButton } from "./components/Button";
+import { SmallButton, LargeButton } from "./components/button/Button";
+import Header from "./components/header/Header";
 
 function App() {
     const [result, setResult] = React.useState(false);
@@ -21,17 +22,7 @@ function App() {
     React.useEffect(() => assignData(), []);
     return (
         <div className="App">
-            <header className="App-header">
-                <p>{data}</p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+            <Header text="login"></Header>
             <main>
                 {/* <SmallButton>Click me!</SmallButton> */}
                 <SmallButton>Click me!</SmallButton>

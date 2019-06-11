@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const StyledButton = styled.button`
@@ -18,35 +17,16 @@ const StyledButton = styled.button`
 
 const StyledSmallButton = styled(StyledButton)`
     width: 24rem;
-    @media only screen and (max-width:768px) {
+    @media only screen and (max-width: 768px) {
         width: 8rem;
-      }
+    }
 `;
 
 const StyledLargeButton = styled(StyledButton)`
     width: 32rem;
-    @media only screen and (max-width:768px) {
+    @media only screen and (max-width: 768px) {
         width: 16rem;
-      }
+    }
 `;
 
-const SmallButton = props => {
-    return (
-        <StyledSmallButton onClick={props.onClick} data-testid="small-button">
-            {props.children}
-        </StyledSmallButton>
-    );
-};
-
-const LargeButton = props => {
-    return (
-        <StyledLargeButton onClick={props.onClick} data-testid="large-button">
-            {props.children}
-        </StyledLargeButton>
-    );
-};
-
-export {
-    SmallButton,
-    LargeButton
-};
+export { StyledSmallButton, StyledLargeButton };
