@@ -1,23 +1,24 @@
-import React from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import Button from "./components/Button";
 
 function App() {
-    const [data, setData] = React.useState(null)
+    const [data, setData] = React.useState(null);
 
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
             .then(result => result.json())
-            .catch("error")
-    }
+            .catch("error");
+    };
 
     const assignData = () => {
         getData().then(result => {
-            setData(result.records[0].fields.Item)
-        })
-    }
+            setData(result.records[0].fields.Item);
+        });
+    };
     // eslint-disable-next-line
-    React.useEffect(() => assignData(), [])
+    React.useEffect(() => assignData(), []);
     return (
         <div className="App">
             <header className="App-header">
@@ -32,8 +33,11 @@ function App() {
                     Learn React
                 </a>
             </header>
+            <main>
+                <Button>Click me!</Button>
+            </main>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;
