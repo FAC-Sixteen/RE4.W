@@ -16,7 +16,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts test && react-scripts build",
+        "build": "react-scripts test --watchAll=false && react-scripts build",
         "format": "prettier --write '**/*.{js,css,md}'",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
