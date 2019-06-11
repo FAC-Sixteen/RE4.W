@@ -12,6 +12,8 @@
     "prettier": "^1.18.1",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.4",
+    "react-dnd": "^7.6.0",
+    "react-dnd-html5-backend": "^7.6.0",
     "react-dom": "^16.8.6",
     "react-p5-wrapper": "^2.0.0",
     "react-scripts": "3.0.1",
