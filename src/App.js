@@ -1,10 +1,14 @@
-import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+
+import React from "react"
+import "./App.css"
+import P5Wrapper from "react-p5-wrapper"
+import sketch from "./utils/sketches/sketch"
 import Button from "./components/Button";
 
 function App() {
-    const [data, setData] = React.useState(null);
+    const [result, setResult] = React.useState(false)
+    const [data, setData] = React.useState(null)
+
 
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
@@ -22,7 +26,6 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
                 <p>{data}</p>
                 <a
                     className="App-link"
@@ -32,6 +35,8 @@ function App() {
                 >
                     Learn React
                 </a>
+                <div>Result:{result.toString()}</div>
+                <P5Wrapper sketch={sketch} setResult={setResult}></P5Wrapper>
             </header>
             <main>
                 <Button>Click me!</Button>
