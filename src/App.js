@@ -1,9 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import  { SmallButton, LargeButton } from "./components/Button";
 
 function App() {
+    const [result, setResult] = React.useState(false);
     const [data, setData] = React.useState(null);
 
     const getData = () => {
@@ -22,7 +22,6 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
                 <p>{data}</p>
                 <a
                     className="App-link"
