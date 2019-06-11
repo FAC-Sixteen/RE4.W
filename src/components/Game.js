@@ -53,7 +53,7 @@ const Game = () => {
 
     const [droppedBoxNames, setDroppedBoxNames] = React.useState([]);
     const isDropped = boxName => {
-        console.log("something was dropped");
+        console.log("things dropped", droppedBoxNames);
         return droppedBoxNames.indexOf(boxName) > -1;
     };
 
