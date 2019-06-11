@@ -1,8 +1,10 @@
 import React from "react"
-import logo from "./logo.svg"
 import "./App.css"
+import P5Wrapper from "react-p5-wrapper"
+import sketch from "./utils/sketches/sketch"
 
 function App() {
+    const [result, setResult] = React.useState(false)
     const [data, setData] = React.useState(null)
 
     const getData = () => {
@@ -21,7 +23,6 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
                 <p>{data}</p>
                 <a
                     className="App-link"
@@ -31,6 +32,8 @@ function App() {
                 >
                     Learn React
                 </a>
+                <div>Result:{result.toString()}</div>
+                <P5Wrapper sketch={sketch} setResult={setResult}></P5Wrapper>
             </header>
         </div>
     )
