@@ -2,6 +2,7 @@ import React from "react";
 import "./App.css";
 import { SmallButton, LargeButton } from "./components/button/Button";
 import Header from "./components/header/Header";
+import Main from "./components/main/Main";
 
 function App() {
     const [result, setResult] = React.useState(false);
@@ -22,12 +23,12 @@ function App() {
     React.useEffect(() => assignData(), []);
     return (
         <div className="App">
-            <Header text="login"></Header>
-            <main>
+            <Header text="Game"></Header>
+            <Main>
                 {/* <SmallButton>Click me!</SmallButton> */}
                 <SmallButton>Click me!</SmallButton>
                 <LargeButton>and me!</LargeButton>
-            </main>
+            </Main>
         </div>
     );
 }

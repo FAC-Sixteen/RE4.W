@@ -15,10 +15,14 @@ const StyledContainer = styled.div`
     align-items: center;
     width: 100vw;
     height: 8rem;
+
+    @media only screen and (max-width: 768px) {
+        height: 4rem;
+    }
 `;
 
 const StyledText = styled.img`
-    width: auto;
+    width: 4em;
 `;
 
 export { StyledHeader, StyledContainer, StyledText };
