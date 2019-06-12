@@ -2,10 +2,21 @@ import React from "react";
 import "./App.css";
 import Button from "./components/Button";
 import Game from "./components/Game";
+import Superhero from "./components/Superhero";
+
+import characterColours from "./utils/character-colours";
 
 function App() {
     const [result, setResult] = React.useState(false);
     const [data, setData] = React.useState(null);
+    const [ninja, setNinja] = React.useState({
+        hero: "ninja",
+        colours: {
+            skin: characterColours.skin[0],
+            base: characterColours.base[0],
+            hair: characterColours.hair[0],
+        },
+    });
 
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
@@ -18,6 +29,17 @@ function App() {
             setData(result.records[0].fields.Item);
         });
     };
+
+    const handleSetNinja = () =>
+        setNinja({
+            hero: "ninja",
+            colours: {
+                skin: characterColours.skin[1],
+                base: characterColours.base[2],
+                hair: characterColours.hair[5],
+            },
+        });
+
     // eslint-disable-next-line
     React.useEffect(() => assignData(), []);
     return (
@@ -35,8 +57,8 @@ function App() {
             </header> */}
             <main>
                 <Game />
-
-                <Button>Click me!</Button>
+                <Superhero character={ninja} />
+                <Button onClick={handleSetNinja}>Click me!</Button>
             </main>
         </div>
     );
