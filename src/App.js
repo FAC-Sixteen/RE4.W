@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import Button from "./components/Button";
+import Game from "./components/Game";
 
 function App() {
     const [result, setResult] = React.useState(false);
@@ -21,7 +22,7 @@ function App() {
     React.useEffect(() => assignData(), []);
     return (
         <div className="App">
-            <header className="App-header">
+            {/* <header className="App-header">
                 <p>{data}</p>
                 <a
                     className="App-link"
@@ -31,8 +32,10 @@ function App() {
                 >
                     Learn React
                 </a>
-            </header>
+            </header> */}
             <main>
+                <Game />
+
                 <Button>Click me!</Button>
             </main>
         </div>
