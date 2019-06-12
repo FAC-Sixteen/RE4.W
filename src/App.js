@@ -27,11 +27,11 @@ function App() {
 
     const handleSetNinja = () =>
         setNinja({
-            hero: "ninja",
+            hero: "short",
             colours: {
-                skin: characterColours.skin[1],
-                base: characterColours.base[3],
-                hair: characterColours.hair[1],
+                skin: characterColours.skin[3],
+                base: characterColours.base[4],
+                hair: characterColours.hair[0],
             },
         });
 
