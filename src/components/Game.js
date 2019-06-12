@@ -36,7 +36,7 @@ const items = [
 ];
 
 const Game = () => {
-    const [bins, setBins] = React.useState([
+    const [bins] = React.useState([
         { name: "trashBin", accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE] },
         {
             name: "recyclingBin",
@@ -44,20 +44,21 @@ const Game = () => {
         },
     ]);
 
-    const [itemCheck, setItemCheck] = React.useState(
+    const [itemCheck] = React.useState(
         items.map(item => ({
             name: `${item.fields.Item} ${item.fields.Category}`,
             type:
                 item.fields.Recycle === "Yes"
                     ? ItemTypes.RECYCLEABLE
-                    : ItemTypes.TRASH,
+                    : ItemTypes.TRASH
         }))
     );
 
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
+    const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
 
-    const isDropped = itemName => {
+    const isDropped = (itemName, index) => {
         return (
             droppedTrashItems.indexOf(itemName) > -1 ||
             droppedRecycledItems.indexOf(itemName) > -1
@@ -66,20 +67,29 @@ const Game = () => {
 
     const handleDrop = React.useCallback(
         (item, binName) => {
-            console.log("binName", binName);
             const { name, type } = item;
+
             if (binName === "trashBin") {
-                type === ItemTypes.TRASH ? alert("correct") : alert("wrong");
+                type === ItemTypes.TRASH 
+                    ? alert("correct") 
+                    : alert("wrong");
                 setDroppedTrashItems(droppedTrashItems.concat([name]));
+                setDroppedTotalItems(droppedTotalItems.concat([name]));
+
             } else {
                 type === ItemTypes.RECYCLEABLE
                     ? alert("correct")
                     : alert("wrong");
                 setDroppedRecycledItems(droppedRecycledItems.concat([name]));
+                setDroppedTotalItems(droppedTotalItems.concat([name]));
             }
         },
-        [droppedTrashItems, droppedRecycledItems]
+        [droppedRecycledItems, droppedTrashItems, droppedTotalItems]
     );
+
+    if (droppedTotalItems.length === itemCheck.length) {
+        alert('Game over');
+    }
 
     return (
         <div>
@@ -102,7 +112,7 @@ const Game = () => {
                         <Item
                             name={name}
                             type={type}
-                            isDropped={isDropped(name)}
+                            isDropped={isDropped(name, index)}
                             key={index}
                         />
                     );
