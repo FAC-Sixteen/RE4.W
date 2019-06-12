@@ -58,9 +58,6 @@ const Game = () => {
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
 
     const isDropped = itemName => {
-        console.log("droppedTRASH", droppedTrashItems);
-        console.log("droppedRECYCLED", droppedRecycledItems);
-
         return (
             droppedTrashItems.indexOf(itemName) > -1 ||
             droppedRecycledItems.indexOf(itemName) > -1
