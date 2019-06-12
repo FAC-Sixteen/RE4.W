@@ -37,12 +37,23 @@ const items = [
 
 const Game = () => {
     const [score, setScore] = React.useState(0);
+    const [time, setTime] = React.useState(30);
+
+    React.useEffect(() => {
+        const intervalId = window.setInterval(interval, 1000);
+        return () => window.clearInterval(intervalId);
+    })
+
+    const interval = () => setTime(oldTime => oldTime <= 0 ? 0 : oldTime - 1);
     
     const [bins] = React.useState([
         { name: "trashBin", accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE] },
         {
             name: "recyclingBin",
-            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE],
+            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE]
+
+            // We could refactor this code at some point to have 'dropped?' and 'correct bin?' properties, 
+            // rather than have five different states to represent this. 
         },
     ]);
 
@@ -103,11 +114,9 @@ const Game = () => {
         setWrongItems(wrongItems.concat([name]));
     }
 
-    if (droppedTotalItems.length === itemCheck.length) {
+    if (droppedTotalItems.length === itemCheck.length || time <= 0) {
         alert('Game over');
     }
-
-    console.log('correct: ', correctItems, 'wrong: ', wrongItems)
 
     return (
         <div>
@@ -126,6 +135,9 @@ const Game = () => {
 
             <p>
                 Score: {score}
+            </p>
+            <p>
+                Time: {time}
             </p>
 
             <div>
