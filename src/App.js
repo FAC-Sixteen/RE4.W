@@ -21,13 +21,8 @@ function App() {
     const getData = () => {
         return fetch(`.netlify/functions/getData`)
             .then(result => result.json())
-            .catch("error");
-    };
-
-    const assignData = () => {
-        getData().then(result => {
-            setData(result.records[0].fields.Item);
-        });
+            .then(result => setData(result.records[0].fields.Item))
+            .catch(err => console.log(err));
     };
 
     const handleSetNinja = () =>
@@ -35,26 +30,16 @@ function App() {
             hero: "ninja",
             colours: {
                 skin: characterColours.skin[1],
-                base: characterColours.base[2],
-                hair: characterColours.hair[5],
+                base: characterColours.base[3],
+                hair: characterColours.hair[1],
             },
         });
 
-    // eslint-disable-next-line
-    React.useEffect(() => assignData(), []);
+    React.useEffect(() => {
+        getData();
+    }, []);
     return (
         <div className="App">
-            {/* <header className="App-header">
-                <p>{data}</p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header> */}
             <main>
                 <Game />
                 <Superhero character={ninja} />
