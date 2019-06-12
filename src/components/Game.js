@@ -36,6 +36,8 @@ const items = [
 ];
 
 const Game = () => {
+    const [score, setScore] = React.useState(0);
+    
     const [bins] = React.useState([
         { name: "trashBin", accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE] },
         {
@@ -54,6 +56,8 @@ const Game = () => {
         }))
     );
 
+    const [correctItems, setCorrectItems] = React.useState([]);
+    const [wrongItems, setWrongItems] = React.useState([]);
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
@@ -71,15 +75,15 @@ const Game = () => {
 
             if (binName === "trashBin") {
                 type === ItemTypes.TRASH 
-                    ? alert("correct") 
-                    : alert("wrong");
+                    ? handleCorrect(name)
+                    : handleWrong(name);
                 setDroppedTrashItems(droppedTrashItems.concat([name]));
                 setDroppedTotalItems(droppedTotalItems.concat([name]));
 
             } else {
                 type === ItemTypes.RECYCLEABLE
-                    ? alert("correct")
-                    : alert("wrong");
+                    ? handleCorrect(name)
+                    : handleWrong(name);
                 setDroppedRecycledItems(droppedRecycledItems.concat([name]));
                 setDroppedTotalItems(droppedTotalItems.concat([name]));
             }
@@ -87,9 +91,23 @@ const Game = () => {
         [droppedRecycledItems, droppedTrashItems, droppedTotalItems]
     );
 
+
+    const handleCorrect = (name) => {
+        alert('correct');
+        setScore(oldScore => oldScore + 1);
+        setCorrectItems(correctItems.concat([name]));
+    }
+
+    const handleWrong = (name) => {
+        alert('wrong');
+        setWrongItems(wrongItems.concat([name]));
+    }
+
     if (droppedTotalItems.length === itemCheck.length) {
         alert('Game over');
     }
+
+    console.log('correct: ', correctItems, 'wrong: ', wrongItems)
 
     return (
         <div>
