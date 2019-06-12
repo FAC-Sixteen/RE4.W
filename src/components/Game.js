@@ -124,6 +124,10 @@ const Game = () => {
                 })}
             </div>
 
+            <p>
+                Score: {score}
+            </p>
+
             <div>
                 {itemCheck.map(({ name, type }, index) => {
                     return (
