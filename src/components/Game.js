@@ -54,10 +54,6 @@ const Game = () => {
         }))
     );
 
-    // const [droppedCorrectItems, setDroppedCorrectItems] = React.useState([]);
-
-    // React.useEffect(() => {}, [droppedCorrectItems]);
-
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
 
@@ -72,12 +68,16 @@ const Game = () => {
     };
 
     const handleDrop = React.useCallback(
-        (index, item, binName) => {
+        (item, binName) => {
             console.log("binName", binName);
-            const { name } = item;
+            const { name, type } = item;
             if (binName === "trashBin") {
+                type === ItemTypes.TRASH ? alert("correct") : alert("wrong");
                 setDroppedTrashItems(droppedTrashItems.concat([name]));
             } else {
+                type === ItemTypes.RECYCLEABLE
+                    ? alert("correct")
+                    : alert("wrong");
                 setDroppedRecycledItems(droppedRecycledItems.concat([name]));
             }
         },
@@ -88,11 +88,10 @@ const Game = () => {
         <div>
             <div>
                 {bins.map(({ name, accepts }, index) => {
-                    // console.log(">>>", name, accepts);
                     return (
                         <Bin
                             accept={accepts}
-                            onDrop={item => handleDrop(index, item, name)}
+                            onDrop={item => handleDrop(item, name)}
                             key={index}
                             name={name}
                         />
@@ -101,18 +100,16 @@ const Game = () => {
             </div>
 
             <div>
-                {itemCheck
-                    // .filter(item => !(droppedTrashItems.indexOf(item) > -1))
-                    .map(({ name, type }, index) => {
-                        return (
-                            <Item
-                                name={name}
-                                type={type}
-                                isDropped={isDropped(name)}
-                                key={index}
-                            />
-                        );
-                    })}
+                {itemCheck.map(({ name, type }, index) => {
+                    return (
+                        <Item
+                            name={name}
+                            type={type}
+                            isDropped={isDropped(name)}
+                            key={index}
+                        />
+                    );
+                })}
             </div>
         </div>
     );
