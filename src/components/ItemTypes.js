@@ -1,4 +1,4 @@
 export default {
     TRASH: "trash",
-    RECYLEABLE: "recyclable",
+    RECYCLEABLE: "recycleable",
 };

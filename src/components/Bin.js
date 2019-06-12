@@ -14,7 +14,7 @@ const style = {
     float: "left",
 };
 
-const Bin = ({ accept, onDrop }) => {
+const Bin = ({ accept, onDrop, name }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
         accept,
         drop: onDrop,
@@ -26,7 +26,7 @@ const Bin = ({ accept, onDrop }) => {
     const isActive = isOver && canDrop;
     return (
         <div ref={drop} style={Object.assign({}, style)}>
-            {isActive ? "Release to drop" : `This bin accepts ${accept}`}
+            {isActive ? "Release to drop" : `This bin accepts ${name}`}
         </div>
     );
 };

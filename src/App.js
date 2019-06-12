@@ -22,8 +22,8 @@ function App() {
     React.useEffect(() => assignData(), []);
     return (
         <div className="App">
-            <header className="App-header">
-                {/* <p>{data}</p> */}
+            {/* <header className="App-header">
+                <p>{data}</p>
                 <a
                     className="App-link"
                     href="https://reactjs.org"
@@ -32,7 +32,7 @@ function App() {
                 >
                     Learn React
                 </a>
-            </header>
+            </header> */}
             <main>
                 <Game />
 

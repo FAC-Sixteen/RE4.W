@@ -15,12 +15,16 @@ const Item = ({ name, type, isDropped }) => {
     const [{ opacity }, drag] = useDrag({
         item: { name, type },
         collect: monitor => ({
-            opactiy: monitor.isDragging() ? 0.4 : 1,
+            opacity: monitor.isDragging() ? 0.4 : 1,
         }),
     });
     return (
-        <div ref={drag} style={Object.assign({}, style, { opacity })}>
-            {name}
+        <div>
+            {isDropped ? null : (
+                <div ref={drag} style={Object.assign({}, style, { opacity })}>
+                    {name}
+                </div>
+            )}
         </div>
     );
 };
