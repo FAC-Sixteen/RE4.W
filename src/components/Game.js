@@ -37,12 +37,33 @@ const items = [
 
 const Game = () => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(30);
+    const [time, setTime] = React.useState(3);
+    const [correctItems, setCorrectItems] = React.useState([]);
+    const [wrongItems, setWrongItems] = React.useState([]);
+    const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
+    const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
+    const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
+
+    const [itemCheck] = React.useState(
+        items.map(item => ({
+            name: `${item.fields.Item} ${item.fields.Category}`,
+            type:
+                item.fields.Recycle === "Yes"
+                    ? ItemTypes.RECYCLEABLE
+                    : ItemTypes.TRASH
+        }))
+    );
 
     React.useEffect(() => {
         const intervalId = window.setInterval(interval, 1000);
         return () => window.clearInterval(intervalId);
-    })
+    }, [])
+
+    React.useEffect(() => {
+        if (droppedTotalItems.length === itemCheck.length || time <= 0) {
+            alert('Game over');
+        }
+    }, [droppedTotalItems, itemCheck, time])
 
     const interval = () => setTime(oldTime => oldTime <= 0 ? 0 : oldTime - 1);
     
@@ -57,21 +78,7 @@ const Game = () => {
         },
     ]);
 
-    const [itemCheck] = React.useState(
-        items.map(item => ({
-            name: `${item.fields.Item} ${item.fields.Category}`,
-            type:
-                item.fields.Recycle === "Yes"
-                    ? ItemTypes.RECYCLEABLE
-                    : ItemTypes.TRASH
-        }))
-    );
-
-    const [correctItems, setCorrectItems] = React.useState([]);
-    const [wrongItems, setWrongItems] = React.useState([]);
-    const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
-    const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
-    const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
+    
 
     const isDropped = (itemName, index) => {
         return (
@@ -112,10 +119,6 @@ const Game = () => {
     const handleWrong = (name) => {
         alert('wrong');
         setWrongItems(wrongItems.concat([name]));
-    }
-
-    if (droppedTotalItems.length === itemCheck.length || time <= 0) {
-        alert('Game over');
     }
 
     return (
