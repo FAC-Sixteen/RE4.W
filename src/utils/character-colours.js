@@ -40,8 +40,8 @@ export default {
         },
         {
             // pink
-            light: "#46251E",
-            dark: "#E25CA5",
+            light: "#E25CA5",
+            dark: "#D82787",
         },
         {
             // blue
@@ -81,8 +81,8 @@ export default {
         },
         {
             // pink
-            light: "#46251E",
-            dark: "#E25CA5",
+            light: "#E25CA5",
+            dark: "#D82787",
             recycle: "#821751",
         },
         {
