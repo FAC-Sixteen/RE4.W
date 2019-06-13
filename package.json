@@ -28,12 +28,12 @@
     },
     "scripts": {
         "start": "react-scripts start",
+        "lint": "eslint '**/*.js'",
         "build": "react-scripts build",
         "format": "prettier --write '**/*.{js,css,md}'",
         "test": "react-scripts test",
         "devTest": "react-scripts test --watchAll",
-        "eject": "react-scripts eject",
-        "lint": "eslint '**/*.js'"
+        "eject": "react-scripts eject"
     },
     "eslintConfig": {
         "extends": "react-app"
