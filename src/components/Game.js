@@ -82,7 +82,7 @@ const Game = () => {
     );
 
     return (
-        <div>
+        <div data-testid="game">
             <div>
                 {bins.map(({ name, accepts }, index) => {
                     return (
