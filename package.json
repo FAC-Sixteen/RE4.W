@@ -33,7 +33,7 @@
         "test": "react-scripts test",
         "devTest": "react-scripts test --watchAll",
         "eject": "react-scripts eject",
-        "lint": "eslint src"
+        "lint": "eslint '**/*.js'"
     },
     "eslintConfig": {
         "extends": "react-app"
