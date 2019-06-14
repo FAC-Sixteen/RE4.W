@@ -19,10 +19,13 @@ function App() {
     });
 
     const getData = () => {
-        return fetch(`.netlify/functions/getData`)
-            .then(result => result.json())
-            .then(result => setData(result.records[0].fields.Item))
-            .catch(err => console.log(err));
+        return (
+            fetch(`.netlify/functions/getData`)
+                .then(result => result.json())
+                .then(result => console.log(result))
+                // .then(result => setData(result.records[0].fields.Item))
+                .catch(err => console.log(err))
+        );
     };
 
     const handleSetNinja = () =>
