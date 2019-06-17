@@ -17,7 +17,7 @@ const Game = ({ data }) => {
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
 
-    const [formattedData] = React.useState(formatData(data));
+    const formattedData = formatData(data);
 
     React.useEffect(() => {
         const intervalId = window.setInterval(interval, 1000);
