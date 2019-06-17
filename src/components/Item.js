@@ -1,7 +1,10 @@
 import React from "react";
 import { useDrag } from "react-dnd";
+import styled from "styled-components";
 
 const style = {
+    width: "100px",
+    height: "100px",
     border: "1px dashed gray",
     backgroundColor: "white",
     padding: "0.5rem 1rem",
@@ -11,18 +14,22 @@ const style = {
     float: "left",
 };
 
-const Item = ({ name, type, isDropped }) => {
+const ItemImg = styled.img`
+    max-width: 100px;
+`;
+
+const Item = ({ itemName, type, Image, isDropped }) => {
     const [{ opacity }, drag] = useDrag({
-        item: { name, type },
+        item: { itemName, type },
         collect: monitor => ({
-            opacity: monitor.isDragging() ? 0.4 : 1,
+            opacity: monitor.isDragging() ? 0 : 1,
         }),
     });
     return (
         <div>
             {isDropped ? null : (
                 <div ref={drag} style={Object.assign({}, style, { opacity })}>
-                    {name}
+                    <ItemImg src={Image} alt={itemName} />
                 </div>
             )}
         </div>

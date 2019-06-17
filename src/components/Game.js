@@ -6,36 +6,9 @@ import HTML5Backend from "react-dnd-html5-backend";
 import Bin from "./Bin";
 import Item from "./Item";
 import ItemTypes from "./ItemTypes";
+import formatData from "../utils/formatData";
 
-const items = [
-    {
-        fields: {
-            Item: "Coca Cola",
-            Recycle: "Yes",
-            Category: "Soft Drink",
-            Bin: "Cans are very easy to recycle and go in your bin at home.",
-            Tip:
-                "Last year in the UK, we recycled 4.5 billion aluminium cans. Thats enough to reach around the world 13 times!",
-            Image:
-                "https://www.dropbox.com/s/dwjvp30c21ve3dt/cocacola_can.png?dl=0",
-        },
-    },
-    {
-        fields: {
-            Item: "Walkers",
-            Recycle: "No",
-            Category: "Crisp packet",
-            Bin:
-                "Crisp packets can't be recycled, so put them in the normal bin",
-            Tip:
-                "Together, thats enough to reach twice the height of the worlds tallest building!",
-            Image:
-                "https://www.dropbox.com/s/hcxdv4af86zo2qa/Crisp-packet-walkers.png?dl=0",
-        },
-    },
-];
-
-const Game = () => {
+const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
     const [time, setTime] = React.useState(300);
     const [correctItems, setCorrectItems] = React.useState([]);
@@ -44,15 +17,7 @@ const Game = () => {
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
 
-    const [itemCheck] = React.useState(
-        items.map(item => ({
-            name: `${item.fields.Item} ${item.fields.Category}`,
-            type:
-                item.fields.Recycle === "Yes"
-                    ? ItemTypes.RECYCLEABLE
-                    : ItemTypes.TRASH,
-        }))
-    );
+    const [formattedData] = React.useState(formatData(data));
 
     React.useEffect(() => {
         const intervalId = window.setInterval(interval, 1000);
@@ -60,18 +25,21 @@ const Game = () => {
     }, []);
 
     React.useEffect(() => {
-        if (droppedTotalItems.length === itemCheck.length || time <= 0) {
+        if (droppedTotalItems.length === formattedData.length || time <= 0) {
             alert("Game over");
         }
-    }, [droppedTotalItems, itemCheck, time]);
+    }, [droppedTotalItems, formattedData, time]);
 
     const interval = () => setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
 
     const [bins] = React.useState([
-        { name: "trashBin", accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE] },
         {
-            name: "recyclingBin",
-            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE],
+            binName: "trashBin",
+            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLABLE],
+        },
+        {
+            binName: "recyclingBin",
+            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLABLE],
 
             // We could refactor this code at some point to have 'dropped?' and 'correct bin?' properties,
             // rather than have five different states to represent this.
@@ -86,47 +54,49 @@ const Game = () => {
     };
 
     const handleDrop = React.useCallback(
-        (item, binName) => {
-            const { name, type } = item;
+        (formattedData, binName) => {
+            const { itemName, type } = formattedData;
 
             if (binName === "trashBin") {
                 type === ItemTypes.TRASH
-                    ? handleCorrect(name)
-                    : handleWrong(name);
-                setDroppedTrashItems(droppedTrashItems.concat([name]));
-                setDroppedTotalItems(droppedTotalItems.concat([name]));
+                    ? handleCorrect(itemName)
+                    : handleWrong(itemName);
+                setDroppedTrashItems(droppedTrashItems.concat([itemName]));
+                setDroppedTotalItems(droppedTotalItems.concat([itemName]));
             } else {
-                type === ItemTypes.RECYCLEABLE
-                    ? handleCorrect(name)
-                    : handleWrong(name);
-                setDroppedRecycledItems(droppedRecycledItems.concat([name]));
-                setDroppedTotalItems(droppedTotalItems.concat([name]));
+                type === ItemTypes.RECYCLABLE
+                    ? handleCorrect(itemName)
+                    : handleWrong(itemName);
+                setDroppedRecycledItems(
+                    droppedRecycledItems.concat([itemName])
+                );
+                setDroppedTotalItems(droppedTotalItems.concat([itemName]));
             }
         },
         [droppedRecycledItems, droppedTrashItems, droppedTotalItems]
     );
 
-    const handleCorrect = name => {
+    const handleCorrect = itemName => {
         alert("correct");
         setScore(oldScore => oldScore + 1);
-        setCorrectItems(correctItems.concat([name]));
+        setCorrectItems(correctItems.concat([itemName]));
     };
 
-    const handleWrong = name => {
+    const handleWrong = itemName => {
         alert("wrong");
-        setWrongItems(wrongItems.concat([name]));
+        setWrongItems(wrongItems.concat([itemName]));
     };
 
     return (
         <div data-testid="game">
             <div>
-                {bins.map(({ name, accepts }, index) => {
+                {bins.map(({ binName, accepts }, index) => {
                     return (
                         <Bin
                             accept={accepts}
-                            onDrop={item => handleDrop(item, name)}
+                            onDrop={item => handleDrop(item, binName)}
                             key={index}
-                            name={name}
+                            name={binName}
                         />
                     );
                 })}
@@ -136,12 +106,13 @@ const Game = () => {
             <p>Time: {time}</p>
 
             <div>
-                {itemCheck.map(({ name, type }, index) => {
+                {formattedData.map(({ itemName, type, Image }, index) => {
                     return (
                         <Item
-                            name={name}
+                            itemName={itemName}
                             type={type}
-                            isDropped={isDropped(name, index)}
+                            Image={Image}
+                            isDropped={isDropped(itemName, index)}
                             key={index}
                         />
                     );

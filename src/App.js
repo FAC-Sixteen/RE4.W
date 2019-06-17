@@ -44,12 +44,7 @@ function App() {
     return (
         <div className="App">
             <main>
-                <p>
-                    {data[0].Item}, {data[0].Category}
-                </p>
-                <img src={data[0].Image}></img>
-
-                <Game />
+                <Game data={data} />
                 <Superhero character={ninja} />
                 <Button onClick={handleSetNinja}>Click me!</Button>
             </main>
