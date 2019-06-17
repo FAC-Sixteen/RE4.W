@@ -37,7 +37,7 @@ const items = [
 
 const Game = () => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(3);
+    const [time, setTime] = React.useState(300);
     const [correctItems, setCorrectItems] = React.useState([]);
     const [wrongItems, setWrongItems] = React.useState([]);
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
@@ -50,35 +50,33 @@ const Game = () => {
             type:
                 item.fields.Recycle === "Yes"
                     ? ItemTypes.RECYCLEABLE
-                    : ItemTypes.TRASH
+                    : ItemTypes.TRASH,
         }))
     );
 
     React.useEffect(() => {
         const intervalId = window.setInterval(interval, 1000);
         return () => window.clearInterval(intervalId);
-    }, [])
+    }, []);
 
     React.useEffect(() => {
         if (droppedTotalItems.length === itemCheck.length || time <= 0) {
-            alert('Game over');
+            alert("Game over");
         }
-    }, [droppedTotalItems, itemCheck, time])
+    }, [droppedTotalItems, itemCheck, time]);
 
-    const interval = () => setTime(oldTime => oldTime <= 0 ? 0 : oldTime - 1);
-    
+    const interval = () => setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
+
     const [bins] = React.useState([
         { name: "trashBin", accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE] },
         {
             name: "recyclingBin",
-            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE]
+            accepts: [ItemTypes.TRASH, ItemTypes.RECYCLEABLE],
 
-            // We could refactor this code at some point to have 'dropped?' and 'correct bin?' properties, 
-            // rather than have five different states to represent this. 
+            // We could refactor this code at some point to have 'dropped?' and 'correct bin?' properties,
+            // rather than have five different states to represent this.
         },
     ]);
-
-    
 
     const isDropped = (itemName, index) => {
         return (
@@ -92,12 +90,11 @@ const Game = () => {
             const { name, type } = item;
 
             if (binName === "trashBin") {
-                type === ItemTypes.TRASH 
+                type === ItemTypes.TRASH
                     ? handleCorrect(name)
                     : handleWrong(name);
                 setDroppedTrashItems(droppedTrashItems.concat([name]));
                 setDroppedTotalItems(droppedTotalItems.concat([name]));
-
             } else {
                 type === ItemTypes.RECYCLEABLE
                     ? handleCorrect(name)
@@ -109,17 +106,16 @@ const Game = () => {
         [droppedRecycledItems, droppedTrashItems, droppedTotalItems]
     );
 
-
-    const handleCorrect = (name) => {
-        alert('correct');
+    const handleCorrect = name => {
+        alert("correct");
         setScore(oldScore => oldScore + 1);
         setCorrectItems(correctItems.concat([name]));
-    }
+    };
 
-    const handleWrong = (name) => {
-        alert('wrong');
+    const handleWrong = name => {
+        alert("wrong");
         setWrongItems(wrongItems.concat([name]));
-    }
+    };
 
     return (
         <div data-testid="game">
@@ -136,12 +132,8 @@ const Game = () => {
                 })}
             </div>
 
-            <p>
-                Score: {score}
-            </p>
-            <p>
-                Time: {time}
-            </p>
+            <p>Score: {score}</p>
+            <p>Time: {time}</p>
 
             <div>
                 {itemCheck.map(({ name, type }, index) => {
