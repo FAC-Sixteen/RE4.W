@@ -3,10 +3,10 @@ import React from "react";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 //components
-import Bin from "./Bin";
-import Item from "./Item";
-import ItemTypes from "./ItemTypes";
-import formatData from "../utils/formatData";
+import Bin from "../bin/Bin";
+import Item from "../item/Item";
+import ItemTypes from "../../utils/ItemTypes";
+import formatData from "../../utils/formatData";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);

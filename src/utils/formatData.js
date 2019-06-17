@@ -1,4 +1,4 @@
-import ItemTypes from "../components/ItemTypes";
+import ItemTypes from "./ItemTypes";
 
 const formatData = data => {
     return data.map(item => ({
