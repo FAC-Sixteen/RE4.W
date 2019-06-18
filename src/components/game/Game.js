@@ -14,13 +14,25 @@ const Game = ({ location: { data } }) => {
     const [time, setTime] = React.useState(10);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
+    const [active, setActive] = React.useState(false);
+    const [images, setImages] = React.useState([]);
+
+    const handleImageLoad = () => {
+        setImages(images.concat(true));
+        if (images.length === 9) setActive(true);
+    };
+    const handleImageError = () => {
+        setImages(images.concat(false));
+    };
 
     React.useEffect(() => {
-        const interval = () =>
-            setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
-        const intervalId = window.setInterval(interval, 1000);
-        return () => window.clearInterval(intervalId);
-    }, []);
+        if (active) {
+            const interval = () =>
+                setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
+            const intervalId = window.setInterval(interval, 1000);
+            return () => window.clearInterval(intervalId);
+        } else return;
+    }, [active]);
 
     React.useEffect(() => {
         if (items.every(item => item.dropped !== false) || time <= 0) {
@@ -83,7 +95,14 @@ const Game = ({ location: { data } }) => {
 
             <div>
                 {items.map((item, index) => {
-                    return <Item item={item} key={index} />;
+                    return (
+                        <Item
+                            item={item}
+                            handleImageLoad={handleImageLoad}
+                            handleImageError={handleImageError}
+                            key={index}
+                        />
+                    );
                 })}
             </div>
             <ReactModal
