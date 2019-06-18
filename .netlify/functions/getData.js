@@ -9,9 +9,9 @@ Airtable.configure({
 
 const base = Airtable.base(process.env.AIRTABLE_BASE);
 
-exports.handler = (event, context, callback) => {
+exports.handler = (_event, _context, callback) => {
     const allRecords = [];
-    base("Imported table")
+    base("Recycling database")
         .select({
             view: "Grid view",
         })

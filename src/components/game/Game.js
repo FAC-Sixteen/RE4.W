@@ -11,26 +11,20 @@ import formatData from "../../utils/formatData";
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
     const [time, setTime] = React.useState(300);
-    const [correctItems, setCorrectItems] = React.useState([]);
-    const [wrongItems, setWrongItems] = React.useState([]);
-    const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
-    const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
-    const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
-
-    const formattedData = formatData(data);
+    const [items, setItems] = React.useState(formatData(data));
 
     React.useEffect(() => {
+        const interval = () =>
+            setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
         const intervalId = window.setInterval(interval, 1000);
         return () => window.clearInterval(intervalId);
     }, []);
 
     React.useEffect(() => {
-        if (droppedTotalItems.length === formattedData.length || time <= 0) {
+        if (items.every(item => item.dropped !== false) || time <= 0) {
             alert("Game over");
         }
-    }, [droppedTotalItems, formattedData, time]);
-
-    const interval = () => setTime(oldTime => (oldTime <= 0 ? 0 : oldTime - 1));
+    }, [items, time]);
 
     const [bins] = React.useState([
         {
@@ -40,52 +34,32 @@ const Game = ({ data }) => {
         {
             binName: "recyclingBin",
             accepts: [ItemTypes.TRASH, ItemTypes.RECYCLABLE],
-
-            // We could refactor this code at some point to have 'dropped?' and 'correct bin?' properties,
-            // rather than have five different states to represent this.
         },
     ]);
 
-    const isDropped = (itemName, index) => {
-        return (
-            droppedTrashItems.indexOf(itemName) > -1 ||
-            droppedRecycledItems.indexOf(itemName) > -1
-        );
-    };
-
     const handleDrop = React.useCallback(
-        (formattedData, binName) => {
-            const { itemName, type } = formattedData;
+        (item, bin) => {
+            const { ID, correctBin } = item;
+            setItems(
+                items.map(currentItem => {
+                    if (currentItem.ID === ID) {
+                        currentItem.dropped = bin;
+                        currentItem.correct = bin === correctBin;
+                        return currentItem;
+                    }
+                    return currentItem;
+                })
+            );
 
-            if (binName === "trashBin") {
-                type === ItemTypes.TRASH
-                    ? handleCorrect(itemName)
-                    : handleWrong(itemName);
-                setDroppedTrashItems(droppedTrashItems.concat([itemName]));
-                setDroppedTotalItems(droppedTotalItems.concat([itemName]));
+            if (bin === correctBin) {
+                alert("correct");
+                setScore(oldScore => oldScore + 1);
             } else {
-                type === ItemTypes.RECYCLABLE
-                    ? handleCorrect(itemName)
-                    : handleWrong(itemName);
-                setDroppedRecycledItems(
-                    droppedRecycledItems.concat([itemName])
-                );
-                setDroppedTotalItems(droppedTotalItems.concat([itemName]));
+                alert("wrong");
             }
         },
-        [droppedRecycledItems, droppedTrashItems, droppedTotalItems]
+        [items]
     );
-
-    const handleCorrect = itemName => {
-        alert("correct");
-        setScore(oldScore => oldScore + 1);
-        setCorrectItems(correctItems.concat([itemName]));
-    };
-
-    const handleWrong = itemName => {
-        alert("wrong");
-        setWrongItems(wrongItems.concat([itemName]));
-    };
 
     return (
         <div data-testid="game">
@@ -106,16 +80,8 @@ const Game = ({ data }) => {
             <p>Time: {time}</p>
 
             <div>
-                {formattedData.map(({ itemName, type, Image }, index) => {
-                    return (
-                        <Item
-                            itemName={itemName}
-                            type={type}
-                            Image={Image}
-                            isDropped={isDropped(itemName, index)}
-                            key={index}
-                        />
-                    );
+                {items.map((item, index) => {
+                    return <Item item={item} key={index} />;
                 })}
             </div>
         </div>

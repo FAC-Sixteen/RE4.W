@@ -8,7 +8,7 @@ const Bin = ({ accept, onDrop, name }) => {
         drop: onDrop,
         collect: monitor => ({
             isOver: monitor.isOver(),
-            conDrop: monitor.canDrop(),
+            canDrop: monitor.canDrop(),
         }),
     });
     const isActive = isOver && canDrop;
