@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import selectData from "../../utils/selectData";
+import StyledHome from "./Home.style";
+import { LargeButton } from "../button/Button";
 
 const Home = () => {
     const [data, setData] = React.useState(null);
@@ -20,15 +22,16 @@ const Home = () => {
     console.log(data);
     return (
         <React.Fragment>
-            <div>HOMEPAGE</div>
-            <Link
-                to={{
-                    pathname: "/game",
-                    data: data,
-                }}
-            >
-                Start Game
-            </Link>
+            <StyledHome>
+                <Link
+                    to={{
+                        pathname: "/game",
+                        data: data,
+                    }}
+                >
+                    <LargeButton>Start Game</LargeButton>
+                </Link>
+            </StyledHome>
         </React.Fragment>
     );
 };
