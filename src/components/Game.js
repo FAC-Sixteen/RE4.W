@@ -8,7 +8,7 @@ import Item from "./Item";
 import ItemTypes from "./ItemTypes";
 import formatData from "../utils/formatData";
 
-const Game = ({ data }) => {
+const Game = props => {
     const [score, setScore] = React.useState(0);
     const [time, setTime] = React.useState(300);
     const [correctItems, setCorrectItems] = React.useState([]);
@@ -16,6 +16,9 @@ const Game = ({ data }) => {
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
+
+    const [data, setData] = React.useState(props.location.data);
+    console.log("data from game", data);
 
     const formattedData = formatData(data);
 
@@ -86,7 +89,6 @@ const Game = ({ data }) => {
         alert("wrong");
         setWrongItems(wrongItems.concat([itemName]));
     };
-
     return (
         <div data-testid="game">
             <div>
