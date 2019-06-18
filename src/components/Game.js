@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import ReactModal from "react-modal";
 //components
 import Bin from "./Bin";
 import Item from "./Item";
@@ -16,7 +17,7 @@ const Game = props => {
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
-    const [gameOver, setGameOver] = React.useState(false);
+    const [showModal, setShowModal] = React.useState(false);
 
     const [data, setData] = React.useState(props.location.data);
     console.log("data from game", data);
@@ -31,7 +32,7 @@ const Game = props => {
     React.useEffect(() => {
         if (droppedTotalItems.length === formattedData.length || time <= 0) {
             // alert("Game over");
-            setGameOver(true);
+            setShowModal(true);
         }
     }, [droppedTotalItems, formattedData, time]);
 
@@ -122,11 +123,20 @@ const Game = props => {
                     );
                 })}
             </div>
-            {gameOver ? (
-                <div>
-                    GAME OVER GOOD JOB! <Link to="/factpage">End Game</Link>
-                </div>
-            ) : null}
+            <ReactModal
+                isOpen={showModal}
+                style={{
+                    overlay: {
+                        width: "50vw",
+                        height: "50vh",
+                        margin: "auto",
+                        backgroundColor: "green",
+                    },
+                    content: { border: "none" },
+                }}
+            >
+                GAME OVER GOOD JOB! <Link to="/factpage">End Game</Link>
+            </ReactModal>
         </div>
     );
 };
