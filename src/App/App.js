@@ -7,17 +7,7 @@ import Home from "../components/home/Home";
 import Results from "../components/results/Results";
 import FactPage from "../components/factPage/FactPage";
 
-// import fetchData from "../utils/fetchData";
-
 function App() {
-    // const [data, setData] = React.useState(null);
-
-    // React.useEffect(() => {
-    //     fetchData(setData);
-    // }, []);
-
-    // if (!data) return <div>Loading...</div>;
-
     return (
         <Router>
             <Main>
@@ -25,8 +15,6 @@ function App() {
                 <Route path="/game" component={Game} />
                 <Route path="/factpage" component={FactPage} />
                 <Route path="/results" component={Results} />
-                {/* <Superhero character={ninja} />
-            <SmallButton onClick={handleSetNinja}>Click me!</SmallButton> */}
             </Main>
         </Router>
     );
