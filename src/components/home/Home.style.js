@@ -5,7 +5,7 @@ const StyledHome = styled.div`
     background-image: url(${ComicBackground});
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 90vh;
 `;
 
 export default StyledHome;

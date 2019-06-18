@@ -9,10 +9,10 @@ import Item from "../item/Item";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 
-const Game = props => {
+const Game = ({ location: { data } }) => {
     const [score, setScore] = React.useState(0);
     const [time, setTime] = React.useState(10);
-    const [items, setItems] = React.useState(formatData(props.location.data));
+    const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
 
     React.useEffect(() => {
@@ -98,7 +98,16 @@ const Game = props => {
                     content: { border: "none" },
                 }}
             >
-                GAME OVER GOOD JOB! <Link to="/factpage">End Game</Link>
+                GAME OVER GOOD JOB!{" "}
+                <Link
+                    to={{
+                        pathname: "/factpage",
+                        data: items,
+                        score: score,
+                    }}
+                >
+                    End Game
+                </Link>
             </ReactModal>
         </div>
     );
