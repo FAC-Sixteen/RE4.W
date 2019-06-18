@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import ReactModal from "react-modal";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
+import TouchBackend from "react-dnd-touch-backend";
 //components
 import Bin from "../bin/Bin";
 import Item from "../item/Item";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 
-const Game = ({ location: { data } }) => {
+const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
     const [time, setTime] = React.useState(10);
     const [items, setItems] = React.useState(formatData(data));
@@ -132,4 +133,7 @@ const Game = ({ location: { data } }) => {
     );
 };
 
-export default DragDropContext(HTML5Backend)(Game);
+const DesktopGame = DragDropContext(HTML5Backend)(Game);
+const TouchGame = DragDropContext(TouchBackend)(Game);
+
+export { DesktopGame, TouchGame };

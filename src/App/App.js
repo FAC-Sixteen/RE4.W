@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import Game from "../components/game/Game";
+import Game from "../components/game/GameContainer";
 import Main from "../components/main/Main";
 import Home from "../components/home/Home";
 import Results from "../components/results/Results";
