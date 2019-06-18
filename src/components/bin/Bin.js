@@ -14,7 +14,11 @@ const Bin = ({ accept, onDrop, name }) => {
     const isActive = isOver && canDrop;
     return (
         <StyledBin ref={drop}>
-            {isActive ? "Release to drop" : `This bin accepts ${name}`}
+            {isActive
+                ? "Release to drop"
+                : `This bin accepts ${
+                      name === "recyclingBin" ? "recycling" : "trash"
+                  }`}
         </StyledBin>
     );
 };
