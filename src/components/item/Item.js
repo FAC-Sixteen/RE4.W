@@ -2,7 +2,7 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import DragItem from "./item.style";
 
-const Item = ({ item }) => {
+const Item = ({ item, handleImageLoad, handleImageError }) => {
     const [{ opacity }, drag] = useDrag({
         item,
         collect: monitor => ({
@@ -17,6 +17,8 @@ const Item = ({ item }) => {
                     src={item.Image}
                     alt={item.itemName}
                     opacity={opacity}
+                    onLoad={handleImageLoad}
+                    onError={handleImageError}
                 />
             )}
         </div>

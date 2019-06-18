@@ -13,6 +13,7 @@ const StyledButton = styled.button`
     box-sizing: border-box;
     border-radius: 3em;
     width: ${props => props.length}em;
+    cursor: pointer
 `;
 
 const StyledSmallButton = styled(StyledButton)`
@@ -24,6 +25,7 @@ const StyledSmallButton = styled(StyledButton)`
 
 const StyledLargeButton = styled(StyledButton)`
     width: 32rem;
+    margin: auto;
     @media only screen and (max-width: 768px) {
         width: 16rem;
     }
