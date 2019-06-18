@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 //components
@@ -10,12 +10,13 @@ import formatData from "../utils/formatData";
 
 const Game = props => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(300);
+    const [time, setTime] = React.useState(10);
     const [correctItems, setCorrectItems] = React.useState([]);
     const [wrongItems, setWrongItems] = React.useState([]);
     const [droppedTrashItems, setDroppedTrashItems] = React.useState([]);
     const [droppedRecycledItems, setDroppedRecycledItems] = React.useState([]);
     const [droppedTotalItems, setDroppedTotalItems] = React.useState([]);
+    const [gameOver, setGameOver] = React.useState(false);
 
     const [data, setData] = React.useState(props.location.data);
     console.log("data from game", data);
@@ -29,7 +30,8 @@ const Game = props => {
 
     React.useEffect(() => {
         if (droppedTotalItems.length === formattedData.length || time <= 0) {
-            alert("Game over");
+            // alert("Game over");
+            setGameOver(true);
         }
     }, [droppedTotalItems, formattedData, time]);
 
@@ -120,6 +122,11 @@ const Game = props => {
                     );
                 })}
             </div>
+            {gameOver ? (
+                <div>
+                    GAME OVER GOOD JOB! <Link to="/factpage">End Game</Link>
+                </div>
+            ) : null}
         </div>
     );
 };

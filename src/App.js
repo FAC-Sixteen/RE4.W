@@ -8,14 +8,14 @@ import Game from "./components/Game";
 // import Superhero from "./components/Superhero";
 import Main from "./components/main/Main";
 import Home from "./components/home/Home";
+import Results from "./components/results/Results";
+import FactPage from "./components/factPage/FactPage";
 
 //utils
 // import characterColours from "./utils/character-colours";
-// import selectData from "./utils/selectData";
 
 function App() {
     // // const [result, setResult] = React.useState(false);
-    // const [data, setData] = React.useState(null);
     // const [ninja, setNinja] = React.useState({
     //     hero: "ninja",
     //     colours: {
@@ -24,14 +24,6 @@ function App() {
     //         hair: characterColours.hair[0],
     //     },
     // });
-
-    // const getData = () => {
-    //     return fetch(`.netlify/functions/getData`)
-    //         .then(result => result.json())
-    //         .then(result => selectData(result.records))
-    //         .then(result => setData(result))
-    //         .catch(err => console.log(err));
-    // };
 
     // const handleSetNinja = () =>
     //     setNinja({
@@ -43,15 +35,13 @@ function App() {
     //         },
     //     });
 
-    // React.useEffect(() => {
-    //     getData();
-    // }, []);
-    // if (!data) return <div>Loading...</div>;
     return (
         <Router>
             <Main>
                 <Route exact path="/" component={Home} />
                 <Route path="/game" component={Game} />
+                <Route path="/factpage" component={FactPage} />
+                <Route path="/results" component={Results} />
                 {/* <Superhero character={ninja} />
                 <SmallButton onClick={handleSetNinja}>Click me!</SmallButton> */}
             </Main>
