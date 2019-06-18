@@ -1,18 +1,6 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-
-const style = {
-    height: "12rem",
-    width: "12rem",
-    marginRight: "1.5rem",
-    marginBottom: "1.5rem",
-    padding: "1rem",
-    border: "1px solid gray",
-    textAlign: "center",
-    fontSize: "1rem",
-    lineHeight: "normal",
-    float: "left",
-};
+import StyledBin from "./Bin.style";
 
 const Bin = ({ accept, onDrop, name }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
@@ -25,9 +13,9 @@ const Bin = ({ accept, onDrop, name }) => {
     });
     const isActive = isOver && canDrop;
     return (
-        <div ref={drop} style={Object.assign({}, style)}>
+        <StyledBin ref={drop}>
             {isActive ? "Release to drop" : `This bin accepts ${name}`}
-        </div>
+        </StyledBin>
     );
 };
 
