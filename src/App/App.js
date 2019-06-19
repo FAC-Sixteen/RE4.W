@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import Game from "../components/game/Game";
+import Game from "../components/game/GameContainer";
 import Main from "../components/main/Main";
 import Home from "../components/home/Home";
 import Results from "../components/results/Results";
@@ -14,6 +14,7 @@ function App() {
             <Route path="/game" component={Game} />
             <Route path="/factpage" component={FactPage} />
             <Route path="/results" component={Results} />
+
         </Router>
     );
 }
