@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import fetchData from "../../utils/fetchData";
 
 import { StyledHome, StyledLogo, StyledLogoTitle } from "./Home.style";
-import { LargeButton } from "../button/Button";
+import { LargeButton, InactiveButton } from "../button/Button";
 import Logo from "../../assets/RecyclingHeroesLogo.png";
 import LogoTitle from "../../assets/RecyclingHeroesTitle.png";
 
@@ -15,7 +15,16 @@ const Home = () => {
         fetchData(setData);
     }, []);
 
-    if (!data) return <div>Loading...</div>;
+    if (!data)
+        return (
+            <React.Fragment>
+                <StyledHome>
+                    <StyledLogo src={Logo} />
+                    <StyledLogoTitle src={LogoTitle} />
+                    <InactiveButton>Loading...</InactiveButton>
+                </StyledHome>
+            </React.Fragment>
+        );
 
     return (
         <React.Fragment>
