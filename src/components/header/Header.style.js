@@ -22,7 +22,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledText = styled.img`
-    width: 4em;
+    width: 10em;
 `;
 
 export { StyledHeader, StyledContainer, StyledText };

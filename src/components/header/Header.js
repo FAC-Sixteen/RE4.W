@@ -13,17 +13,8 @@ const Header = ({ text }) => {
         },
     });
 
-    const handleSetNinja = () =>
-        setNinja({
-            hero: "short",
-            colours: {
-                skin: characterColours.skin[3],
-                base: characterColours.base[4],
-                hair: characterColours.hair[0],
-            },
-        });
-
     const filepath = require(`../../assets/${text}.png`);
+
     return (
         <StyledHeader>
             <StyledContainer>

@@ -6,6 +6,7 @@ import Main from "../components/main/Main";
 import Home from "../components/home/Home";
 import Results from "../components/results/Results";
 import FactPage from "../components/factPage/FactPage";
+import Header from "../components/header/Header";
 
 // import fetchData from "../utils/fetchData";
 
@@ -20,6 +21,7 @@ function App() {
 
     return (
         <Router>
+            <Header text="Game"></Header>
             <Main>
                 <Route exact path="/" component={Home} />
                 <Route path="/game" component={Game} />
