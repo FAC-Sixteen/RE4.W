@@ -1,6 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 import DragItem from "./item.style";
+import DragPreview from "./DragLayer";
 
 const Item = ({ item, handleImageLoad, handleImageError }) => {
     const [{ opacity }, drag] = useDrag({
@@ -10,7 +11,7 @@ const Item = ({ item, handleImageLoad, handleImageError }) => {
         }),
     });
     return (
-        <div>
+        <DragPreview>
             {item.dropped ? null : (
                 <DragItem
                     ref={drag}
@@ -21,7 +22,7 @@ const Item = ({ item, handleImageLoad, handleImageError }) => {
                     onError={handleImageError}
                 />
             )}
-        </div>
+        </DragPreview>
     );
 };
 
