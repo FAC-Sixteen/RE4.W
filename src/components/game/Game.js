@@ -7,6 +7,8 @@ import TouchBackend from "react-dnd-touch-backend";
 //components
 import Bin from "../bin/Bin";
 import Item from "../item/Item";
+import BinTouch from "../bin/BinTouch";
+import ItemTouch from "../item/ItemTouch";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 
@@ -81,7 +83,7 @@ const Game = ({ data }) => {
             <div>
                 {bins.map(({ binName, accepts }, index) => {
                     return (
-                        <Bin
+                        <BinTouch
                             accept={accepts}
                             onDrop={item => handleDrop(item, binName)}
                             key={index}
@@ -97,7 +99,7 @@ const Game = ({ data }) => {
             <div>
                 {items.map((item, index) => {
                     return (
-                        <Item
+                        <ItemTouch
                             item={item}
                             handleImageLoad={handleImageLoad}
                             handleImageError={handleImageError}
