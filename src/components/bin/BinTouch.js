@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DropTarget } from "react-dnd";
 import StyledBin from "./Bin.style";
+import TrashBin from "../../assets/TrashBin.png";
+import RecyclingBin from "../../assets/RecyclingBin.png";
 
 const dragTarget = {
     drop(props, monitor, component) {
@@ -19,11 +21,16 @@ const collect = (connect, monitor) => {
 };
 
 const BinTouch = props => {
-    const { connectDropTarget } = props;
+    const { connectDropTarget, name, correctBin, wrongBin } = props;
 
     return connectDropTarget(
         <div>
-            <StyledBin />
+            <StyledBin
+                src={name === "recyclingBin" ? RecyclingBin : TrashBin}
+                name={name}
+                correctBin={correctBin}
+                wrongBin={wrongBin}
+            ></StyledBin>
         </div>
     );
 };
