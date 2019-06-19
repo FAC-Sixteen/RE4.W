@@ -12,12 +12,12 @@ const Item = ({ item, handleImageLoad, handleImageError }) => {
     });
     return item.dropped ? null : (
         <div>
-            <DragPreview
+            {/* <DragPreview
                 drag={drag}
                 item={item}
                 handleImageLoad={handleImageLoad}
                 handleImageError={handleImageError}
-            />
+            /> */}
             <DragItem
                 ref={drag}
                 src={item.Image}
