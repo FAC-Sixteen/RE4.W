@@ -18,6 +18,7 @@ import {
     ScoreText,
     ExplainText,
 } from "./Game.style";
+import BackGround from "../Background.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
@@ -89,65 +90,69 @@ const Game = ({ data }) => {
         <div data-testid="game">
             <Header text="Game" />
             <Main>
-                <GameFlex>
-                    <TopContainer>
-                        <ScoreText>Score: {score}</ScoreText>
-                        <ExplainText>
-                            Drag and drop the trash into the right bin!
-                        </ExplainText>
-                        <ScoreText>Time: {time}</ScoreText>
-                    </TopContainer>
+                <BackGround>
+                    <GameFlex>
+                        <TopContainer>
+                            <ScoreText>Score: {score}</ScoreText>
+                            <ExplainText>
+                                Drag and drop the trash into the right bin!
+                            </ExplainText>
+                            <ScoreText>Time: {time}</ScoreText>
+                        </TopContainer>
 
-                    <ItemContainer>
-                        {items.map((item, index) => {
-                            return (
-                                <Item
-                                    item={item}
-                                    handleImageLoad={handleImageLoad}
-                                    handleImageError={handleImageError}
-                                    key={index}
-                                />
-                            );
-                        })}
-                    </ItemContainer>
+                        <ItemContainer>
+                            {items.map((item, index) => {
+                                return (
+                                    <Item
+                                        item={item}
+                                        handleImageLoad={handleImageLoad}
+                                        handleImageError={handleImageError}
+                                        key={index}
+                                    />
+                                );
+                            })}
+                        </ItemContainer>
 
-                    <div>
-                        {bins.map(({ binName, accepts }, index) => {
-                            return (
-                                <Bin
-                                    accept={accepts}
-                                    onDrop={item => handleDrop(item, binName)}
-                                    key={index}
-                                    name={binName}
-                                />
-                            );
-                        })}
-                    </div>
-                </GameFlex>
+                        <div>
+                            {bins.map(({ binName, accepts }, index) => {
+                                return (
+                                    <Bin
+                                        accept={accepts}
+                                        onDrop={item =>
+                                            handleDrop(item, binName)
+                                        }
+                                        key={index}
+                                        name={binName}
+                                    />
+                                );
+                            })}
+                        </div>
+                    </GameFlex>
 
-                <ReactModal
-                    isOpen={showModal}
-                    style={{
-                        overlay: {
-                            width: "50vw",
-                            height: "50vh",
-                            margin: "auto",
-                            backgroundColor: "green",
-                        },
-                        content: { border: "none" },
-                    }}
-                >
-                    GAME OVER GOOD JOB!{" "}
-                    <Link
-                        to={{
-                            pathname: "/factpage",
-                            data: items,
-                            score: score,
+                    <ReactModal
+                        isOpen={showModal}
+                        style={{
+                            overlay: {
+                                width: "50vw",
+                                height: "50vh",
+                                margin: "auto",
+                                backgroundColor: "green",
+                            },
+                            content: { border: "none" },
                         }}
                     >
-                        End Game
-                    </Link>
-                </ReactModal>
+                        GAME OVER GOOD JOB!{" "}
+                        <Link
+                            to={{
+                                pathname: "/factpage",
+                                data: items,
+                                score: score,
+                            }}
+                        >
+                            End Game
+                        </Link>
+                    </ReactModal>
+                </BackGround>
             </Main>
         </div>
     );
