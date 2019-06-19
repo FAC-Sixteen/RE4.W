@@ -3,7 +3,7 @@ import formatImageUrl from "./formatImageUrl";
 const selectData = data => {
     let arr = [];
 
-    while (arr.length < 10) {
+    while (arr.length < 6) {
         const randomIndex = Math.floor(Math.random() * Math.floor(data.length));
         const randomItem = data[randomIndex].fields;
 
