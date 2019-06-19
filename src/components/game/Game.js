@@ -22,7 +22,7 @@ import BackGround from "../Background.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(30);
+    const [time, setTime] = React.useState(10);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
