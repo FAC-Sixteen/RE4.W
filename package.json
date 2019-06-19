@@ -34,7 +34,7 @@
     "scripts": {
         "start": "react-scripts start",
         "lint": "eslint '**/*.js'",
-        "build": "react-scripts build",
+        "build": "react-scripts test --watchAll=false && react-scripts build",
         "format": "prettier --write '**/*.{js,css,md}'",
         "test": "react-scripts test",
         "devTest": "react-scripts test --watchAll",
