@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import ReactModal from "react-modal";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
-import TouchBackend from "react-dnd-touch-backend";
 //components
 import Bin from "../bin/Bin";
 import Item from "../item/Item";
@@ -173,6 +172,5 @@ const Game = ({ data }) => {
 };
 
 const DesktopGame = DragDropContext(HTML5Backend)(Game);
-const TouchGame = DragDropContext(TouchBackend)(Game);
 
-export { DesktopGame, TouchGame };
+export default DesktopGame;

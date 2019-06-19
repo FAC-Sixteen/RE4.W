@@ -9,6 +9,7 @@ const DragItem = styled.img`
     cursor: move;
     float: left;
     opacity: ${props => props.opacity};
+    transform: ${props => props.transform || props.transform};
     @media only screen and (max-width: 768px) {
         width: 5rem;
         height: 4rem;
