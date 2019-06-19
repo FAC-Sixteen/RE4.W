@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { DragLayer } from "react-dnd";
 
-import DragItem from "../item/item.style";
+import { DragItem, ItemText, IndividualItem } from "../item/item.style";
 
 const collect = monitor => {
     return {
@@ -27,8 +27,27 @@ const DragPreview = props => {
     if (isDragging) {
         return (
             <div>
+                <IndividualItem>
+                    <DragItem
+                        style={transform}
+                        className="dragging"
+                        ref={props.drag}
+                        src={props.item.Image}
+                        alt={props.item.itemName}
+                        onLoad={props.handleImageLoad}
+                        onError={props.handleImageError}
+                        transform={transform}
+                    />
+                </IndividualItem>
+                <ItemText>{props.item.Category}</ItemText>
+            </div>
+        );
+    }
+
+    return (
+        <div>
+            <IndividualItem>
                 <DragItem
-                    style={transform}
                     className="dragging"
                     ref={props.drag}
                     src={props.item.Image}
@@ -37,21 +56,8 @@ const DragPreview = props => {
                     onError={props.handleImageError}
                     transform={transform}
                 />
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            <DragItem
-                className="dragging"
-                ref={props.drag}
-                src={props.item.Image}
-                alt={props.item.itemName}
-                onLoad={props.handleImageLoad}
-                onError={props.handleImageError}
-                transform={transform}
-            />
+            </IndividualItem>
+            <ItemText>{props.item.Category}</ItemText>
         </div>
     );
 };
