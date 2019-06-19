@@ -20,7 +20,7 @@ import {
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(30);
+    const [time, setTime] = React.useState(2);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -154,4 +154,6 @@ const Game = ({ data }) => {
 
 const DesktopGame = DragDropContext(HTML5Backend)(Game);
 
+
 export default DesktopGame;
+
