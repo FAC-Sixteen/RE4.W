@@ -14,10 +14,17 @@ import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 import Header from "../header/Header";
 import Main from "../main/Main";
+import {
+    GameFlex,
+    ItemContainer,
+    TopContainer,
+    ScoreText,
+    ExplainText,
+} from "./Game.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(100000);
+    const [time, setTime] = React.useState(30);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -25,7 +32,7 @@ const Game = ({ data }) => {
 
     const handleImageLoad = () => {
         setImages(images.concat(true));
-        if (images.length === 9) setActive(true);
+        if (images.length === 5) setActive(true);
     };
     const handleImageError = () => {
         setImages(images.concat(false));
@@ -85,48 +92,42 @@ const Game = ({ data }) => {
         <div data-testid="game">
             <Header text="Game" />
             <Main>
-                <div>
-                    {bins.map(({ binName, accepts }, index) => {
-                        return isTouchDevice() ? (
-                            <BinTouch
-                                accept={accepts}
-                                onDrop={item => handleDrop(item, binName)}
-                                key={index}
-                                name={binName}
-                            />
-                        ) : (
-                            <Bin
-                                accept={accepts}
-                                onDrop={item => handleDrop(item, binName)}
-                                key={index}
-                                name={binName}
-                            />
-                        );
-                    })}
-                </div>
+                <GameFlex>
+                    <TopContainer>
+                        <ScoreText>Score: {score}</ScoreText>
+                        <ExplainText>
+                            Drag and drop the trash into the right bin!
+                        </ExplainText>
+                        <ScoreText>Time: {time}</ScoreText>
+                    </TopContainer>
 
-                <p>Score: {score}</p>
-                <p>Time: {time}</p>
+                    <ItemContainer>
+                        {items.map((item, index) => {
+                            return (
+                                <Item
+                                    item={item}
+                                    handleImageLoad={handleImageLoad}
+                                    handleImageError={handleImageError}
+                                    key={index}
+                                />
+                            );
+                        })}
+                    </ItemContainer>
 
-                <div>
-                    {items.map((item, index) => {
-                        return isTouchDevice() ? (
-                            <ItemTouch
-                                item={item}
-                                handleImageLoad={handleImageLoad}
-                                handleImageError={handleImageError}
-                                key={index}
-                            />
-                        ) : (
-                            <Item
-                                item={item}
-                                handleImageLoad={handleImageLoad}
-                                handleImageError={handleImageError}
-                                key={index}
-                            />
-                        );
-                    })}
-                </div>
+                    <div>
+                        {bins.map(({ binName, accepts }, index) => {
+                            return (
+                                <Bin
+                                    accept={accepts}
+                                    onDrop={item => handleDrop(item, binName)}
+                                    key={index}
+                                    name={binName}
+                                />
+                            );
+                        })}
+                    </div>
+                </GameFlex>
+
                 <ReactModal
                     isOpen={showModal}
                     style={{
