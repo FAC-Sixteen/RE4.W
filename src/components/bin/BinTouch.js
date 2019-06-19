@@ -14,24 +14,19 @@ const collect = (connect, monitor) => {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
     };
 };
 
 const BinTouch = props => {
     const { connectDropTarget } = props;
-    const [{ isOver, canDrop }, drop] = useDrop({
-        accept: props.accept,
-        drop: props.onDrop,
-        collect: monitor => ({
-            isOver: monitor.isOver(),
-            canDrop: monitor.canDrop(),
-        }),
-    });
+
+    const { canDrop, isOver } = props;
     const isActive = isOver && canDrop;
 
     return connectDropTarget(
         <div>
-            <StyledBin ref={drop}>
+            <StyledBin>
                 {isActive
                     ? "Release to drop"
                     : `This bin accepts ${

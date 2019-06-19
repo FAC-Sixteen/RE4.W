@@ -22,7 +22,6 @@ const DragPreview = props => {
     };
 
     const transform = getLayerStyles();
-    console.log(transform);
 
     const { isDragging } = props;
     if (isDragging) {
