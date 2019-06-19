@@ -20,6 +20,14 @@ const StyledLogo = styled.img`
     position: relative;
     margin-bottom: initial;
     margin-top: initial;
-    padding: 6em;
+    padding-bottom: 3em;
 `;
-export { StyledHome, StyledLogo };
+const StyledLogoTitle = styled.img`
+    width: 24em;
+    margin: auto;
+    position: relative;
+    margin-bottom: initial;
+    margin-top: initial;
+    padding-bottom: 4em;
+`;
+export { StyledHome, StyledLogo, StyledLogoTitle };
