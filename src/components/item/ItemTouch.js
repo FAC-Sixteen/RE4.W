@@ -19,27 +19,19 @@ const collect = (connect, monitor) => {
 };
 
 const ItemTouch = props => {
-    const { connectDragSource } = props;
+    const { connectDragSource, item } = props;
 
-    const [{ opacity }, drag] = useDrag({
-        item: props.item,
-        collect: monitor => ({
-            opacity: monitor.isDragging() ? 0 : 1,
-        }),
-    });
+    // const [{ opacity }, drag] = useDrag({
+    //     item: item,
+    //     collect: monitor => ({
+    //         opacity: monitor.isDragging() ? 0 : 1,
+    //     }),
+    // });
 
     return connectDragSource(
-        props.item.dropped ? null : (
+        item.dropped ? null : (
             <div className="source">
                 <DragPreview {...props} />
-                {/* <DragItem
-                    ref={drag}
-                    src={props.item.Image}
-                    alt={props.item.itemName}
-                    opacity={opacity}
-                    onLoad={props.handleImageLoad}
-                    onError={props.handleImageError}
-                /> */}
             </div>
         )
     );

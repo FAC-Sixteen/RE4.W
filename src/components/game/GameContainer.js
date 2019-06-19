@@ -1,6 +1,7 @@
 import React from "react";
 import isTouchDevice from "is-touch-device";
-import { DesktopGame, TouchGame } from "./Game";
+import DesktopGame from "./Game";
+import TouchGame from "./GameTouch";
 
 const Game = ({ location: { data } }) => {
     console.log(isTouchDevice());

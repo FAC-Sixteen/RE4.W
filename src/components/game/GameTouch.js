@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ReactModal from "react-modal";
 import { DragDropContext } from "react-dnd";
-import HTML5Backend from "react-dnd-html5-backend";
+import TouchBackend from "react-dnd-touch-backend";
 //components
-import Bin from "../bin/Bin";
-import Item from "../item/Item";
+import BinTouch from "../bin/BinTouch";
+import ItemTouch from "../item/ItemTouch";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 import Header from "../header/Header";
@@ -100,7 +100,7 @@ const Game = ({ data }) => {
                     <ItemContainer>
                         {items.map((item, index) => {
                             return (
-                                <Item
+                                <ItemTouch
                                     item={item}
                                     handleImageLoad={handleImageLoad}
                                     handleImageError={handleImageError}
@@ -113,9 +113,9 @@ const Game = ({ data }) => {
                     <div>
                         {bins.map(({ binName, accepts }, index) => {
                             return (
-                                <Bin
+                                <BinTouch
                                     accept={accepts}
-                                    onDrop={item => handleDrop(item, binName)}
+                                    handleDrop={handleDrop}
                                     key={index}
                                     name={binName}
                                 />
@@ -152,6 +152,6 @@ const Game = ({ data }) => {
     );
 };
 
-const DesktopGame = DragDropContext(HTML5Backend)(Game);
+const TouchGame = DragDropContext(TouchBackend)(Game);
 
-export default DesktopGame;
+export default TouchGame;

@@ -7,6 +7,7 @@ const dragTarget = {
     drop(props, monitor, component) {
         const droppedItem = monitor.getItem();
         console.log("dropped on target", droppedItem);
+        props.handleDrop(droppedItem, props.name);
     },
 };
 
@@ -21,18 +22,9 @@ const collect = (connect, monitor) => {
 const BinTouch = props => {
     const { connectDropTarget } = props;
 
-    const { canDrop, isOver } = props;
-    const isActive = isOver && canDrop;
-
     return connectDropTarget(
         <div>
-            <StyledBin>
-                {isActive
-                    ? "Release to drop"
-                    : `This bin accepts ${
-                          props.name === "recyclingBin" ? "recycling" : "trash"
-                      }`}
-            </StyledBin>
+            <StyledBin />
         </div>
     );
 };
