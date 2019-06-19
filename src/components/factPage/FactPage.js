@@ -15,36 +15,39 @@ import {
 import { LargeButton } from "../button/Button";
 import FactBubbleImg from "../../assets/FactBubble.png";
 import WiseManSvg from "../avatars/wise-man.svg";
+import Background from "../Background.style";
 
 const FactPage = ({ location: { score, data } }) => {
     return (
         <React.Fragment>
             <Header text="Results" />
             <Main>
-                <StyledFactPage>
-                    <WiseManContainer>
-                        <WiseManText>
-                            Hey, well done! Just before we see your score, did
-                            you know:
-                        </WiseManText>
-                        <WiseMan src={WiseManSvg} />
-                    </WiseManContainer>
+                <Background>
+                    <StyledFactPage>
+                        <WiseManContainer>
+                            <WiseManText>
+                                Hey, well done! Just before we see your score,
+                                did you know:
+                            </WiseManText>
+                            <WiseMan src={WiseManSvg} />
+                        </WiseManContainer>
 
-                    <FactBubbleContainer>
-                        <FactBubbleFact>{data[0].Fact}</FactBubbleFact>
-                        <FactBubble src={FactBubbleImg} />
-                    </FactBubbleContainer>
+                        <FactBubbleContainer>
+                            <FactBubbleFact>{data[0].Fact}</FactBubbleFact>
+                            <FactBubble src={FactBubbleImg} />
+                        </FactBubbleContainer>
 
-                    <Link
-                        to={{
-                            pathname: "/results",
-                            score: score,
-                            items: data,
-                        }}
-                    >
-                        <LargeButton>See Your Results!</LargeButton>
-                    </Link>
-                </StyledFactPage>
+                        <Link
+                            to={{
+                                pathname: "/results",
+                                score: score,
+                                items: data,
+                            }}
+                        >
+                            <LargeButton>See Your Results!</LargeButton>
+                        </Link>
+                    </StyledFactPage>
+                </Background>
             </Main>
         </React.Fragment>
     );
