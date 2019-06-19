@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 const StyledMain = styled.main`
-    margin-top: 8rem;
-    height: calc(100vh-8rem);
+    margin-top: 20vh;
+    height: 80vh;
 
     @media only screen and (max-width: 768px) {
-        margin-top: 4rem;
-        height: calc(100vh-4rem);
+        margin-top: 10vh;
+        height: 90vh;
     }
 `;
 

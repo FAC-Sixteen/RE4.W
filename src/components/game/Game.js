@@ -9,7 +9,6 @@ import Item from "../item/Item";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 import Header from "../header/Header";
-import Main from "../main/Main";
 import {
     GameFlex,
     ItemContainer,
@@ -20,15 +19,17 @@ import {
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(20);
+    const [time, setTime] = React.useState(30);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
     const [images, setImages] = React.useState([]);
+    const [correctBin, setCorrectBin] = React.useState(null);
+    const [wrongBin, setWrongBin] = React.useState(null);
 
     const handleImageLoad = () => {
         setImages(images.concat(true));
-        if (images.length === 5) setActive(true);
+        if (images.length === items.length - 1) setActive(true);
     };
     const handleImageError = () => {
         setImages(images.concat(false));
@@ -75,10 +76,12 @@ const Game = ({ data }) => {
             );
 
             if (bin === correctBin) {
-                alert("correct");
+                setCorrectBin(bin);
+                setWrongBin(null);
                 setScore(oldScore => oldScore + 1);
             } else {
-                alert("wrong");
+                setWrongBin(bin);
+                setCorrectBin(null);
             }
         },
         [items]
@@ -87,67 +90,80 @@ const Game = ({ data }) => {
     return (
         <div data-testid="game">
             <Header text="Game" />
-            <Main>
-                <GameFlex>
-                    <TopContainer>
-                        <ScoreText>Score: {score}</ScoreText>
-                        <ExplainText>
-                            Drag and drop the trash into the right bin!
-                        </ExplainText>
-                        <ScoreText>Time: {time}</ScoreText>
-                    </TopContainer>
+            <GameFlex>
+                <TopContainer>
+                    <ScoreText>
+                        Score:<br></br>
+                        {score}
+                    </ScoreText>
+                    <ExplainText>
+                        Drag and drop the trash into the right bin!
+                    </ExplainText>
+                    <ScoreText>
+                        Time:<br></br>
+                        {time}
+                    </ScoreText>
+                </TopContainer>
 
-                    <ItemContainer>
-                        {items.map((item, index) => {
-                            return (
-                                <Item
-                                    item={item}
-                                    handleImageLoad={handleImageLoad}
-                                    handleImageError={handleImageError}
-                                    key={index}
-                                />
-                            );
-                        })}
-                    </ItemContainer>
+                <ItemContainer>
+                    {items.map((item, index) => {
+                        return (
+                            <Item
+                                item={item}
+                                handleImageLoad={handleImageLoad}
+                                handleImageError={handleImageError}
+                                key={index}
+                            />
+                        );
+                    })}
+                </ItemContainer>
 
-                    <div>
-                        {bins.map(({ binName, accepts }, index) => {
-                            return (
-                                <Bin
-                                    accept={accepts}
-                                    onDrop={item => handleDrop(item, binName)}
-                                    key={index}
-                                    name={binName}
-                                />
-                            );
-                        })}
-                    </div>
-                </GameFlex>
+                <div>
+                    {bins.map(({ binName, accepts }, index) => {
+                        return (
+                            <Bin
+                                accept={accepts}
+                                onDrop={item => handleDrop(item, binName)}
+                                correctBin={correctBin}
+                                wrongBin={wrongBin}
+                                key={index}
+                                name={binName}
+                            />
+                        );
+                    })}
+                </div>
+            </GameFlex>
 
-                <ReactModal
-                    isOpen={showModal}
-                    style={{
-                        overlay: {
-                            width: "50vw",
-                            height: "50vh",
-                            margin: "auto",
-                            backgroundColor: "green",
-                        },
-                        content: { border: "none" },
+            <ReactModal
+                isOpen={showModal}
+                style={{
+                    overlay: {
+                        width: "50vw",
+                        height: "40vh",
+                        margin: "auto",
+                        display: "flex",
+                        "align-items": "center",
+                        backgroundColor: "#F9C332",
+                    },
+                    content: { border: "none" },
+                }}
+            >
+                <ExplainText>
+                    GAME OVER <br></br> <br></br>
+                    <br></br> GOOD JOB! <br></br>
+                    <br></br>
+                    <br></br>
+                </ExplainText>
+                <Link
+                    to={{
+                        pathname: "/factpage",
+                        data: items,
+                        score: score,
                     }}
                 >
-                    GAME OVER GOOD JOB!{" "}
-                    <Link
-                        to={{
-                            pathname: "/factpage",
-                            data: items,
-                            score: score,
-                        }}
-                    >
-                        End Game
-                    </Link>
-                </ReactModal>
-            </Main>
+                    <ExplainText>End Game</ExplainText>
+                </Link>
+            </ReactModal>
         </div>
     );
 };
