@@ -9,6 +9,8 @@ import Bin from "../bin/Bin";
 import Item from "../item/Item";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
+import Header from "../header/Header";
+import Main from "../main/Main";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
@@ -77,59 +79,62 @@ const Game = ({ data }) => {
     );
 
     return (
-        <div data-testid="game">
-            <div>
-                {bins.map(({ binName, accepts }, index) => {
-                    return (
-                        <Bin
-                            accept={accepts}
-                            onDrop={item => handleDrop(item, binName)}
-                            key={index}
-                            name={binName}
-                        />
-                    );
-                })}
-            </div>
+        <React.Fragment data-testid="game">
+            <Header text="Game" />
+            <Main>
+                <div>
+                    {bins.map(({ binName, accepts }, index) => {
+                        return (
+                            <Bin
+                                accept={accepts}
+                                onDrop={item => handleDrop(item, binName)}
+                                key={index}
+                                name={binName}
+                            />
+                        );
+                    })}
+                </div>
 
-            <p>Score: {score}</p>
-            <p>Time: {time}</p>
+                <p>Score: {score}</p>
+                <p>Time: {time}</p>
 
-            <div>
-                {items.map((item, index) => {
-                    return (
-                        <Item
-                            item={item}
-                            handleImageLoad={handleImageLoad}
-                            handleImageError={handleImageError}
-                            key={index}
-                        />
-                    );
-                })}
-            </div>
-            <ReactModal
-                isOpen={showModal}
-                style={{
-                    overlay: {
-                        width: "50vw",
-                        height: "50vh",
-                        margin: "auto",
-                        backgroundColor: "green",
-                    },
-                    content: { border: "none" },
-                }}
-            >
-                GAME OVER GOOD JOB!{" "}
-                <Link
-                    to={{
-                        pathname: "/factpage",
-                        data: items,
-                        score: score,
+                <div>
+                    {items.map((item, index) => {
+                        return (
+                            <Item
+                                item={item}
+                                handleImageLoad={handleImageLoad}
+                                handleImageError={handleImageError}
+                                key={index}
+                            />
+                        );
+                    })}
+                </div>
+                <ReactModal
+                    isOpen={showModal}
+                    style={{
+                        overlay: {
+                            width: "50vw",
+                            height: "50vh",
+                            margin: "auto",
+                            backgroundColor: "green",
+                        },
+                        content: { border: "none" },
                     }}
                 >
-                    End Game
-                </Link>
-            </ReactModal>
-        </div>
+                    GAME OVER GOOD JOB!{" "}
+                    <Link
+                        to={{
+                            pathname: "/factpage",
+                            data: items,
+                            score: score,
+                        }}
+                    >
+                        End Game
+                    </Link>
+                </ReactModal>
+            </Main>
+        </React.Fragment>
     );
 };
 
