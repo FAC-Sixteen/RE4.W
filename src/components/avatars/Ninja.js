@@ -3,8 +3,8 @@ import React from "react";
 const Ninja = ({ colours }) => {
     return (
         <svg
-            width="4rem"
-            height="4rem"
+            width="6rem"
+            height="6rem"
             viewBox="0 0 512 512"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
