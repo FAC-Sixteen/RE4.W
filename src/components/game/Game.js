@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 import { DragDropContext } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 import TouchBackend from "react-dnd-touch-backend";
+import isTouchDevice from "is-touch-device";
 //components
 import Bin from "../bin/Bin";
 import Item from "../item/Item";
@@ -86,8 +87,15 @@ const Game = ({ data }) => {
             <Main>
                 <div>
                     {bins.map(({ binName, accepts }, index) => {
-                        return (
+                        return isTouchDevice() ? (
                             <BinTouch
+                                accept={accepts}
+                                onDrop={item => handleDrop(item, binName)}
+                                key={index}
+                                name={binName}
+                            />
+                        ) : (
+                            <Bin
                                 accept={accepts}
                                 onDrop={item => handleDrop(item, binName)}
                                 key={index}
@@ -102,8 +110,15 @@ const Game = ({ data }) => {
 
                 <div>
                     {items.map((item, index) => {
-                        return (
+                        return isTouchDevice() ? (
                             <ItemTouch
+                                item={item}
+                                handleImageLoad={handleImageLoad}
+                                handleImageError={handleImageError}
+                                key={index}
+                            />
+                        ) : (
+                            <Item
                                 item={item}
                                 handleImageLoad={handleImageLoad}
                                 handleImageError={handleImageError}
