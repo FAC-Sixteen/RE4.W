@@ -5,4 +5,4 @@ const FactBubble = styled.div`
     height: 90vh;
 `;
 
-export default StyledMain;
+export default FactBubble;
