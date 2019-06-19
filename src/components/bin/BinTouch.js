@@ -6,7 +6,6 @@ import StyledBin from "./Bin.style";
 const dragTarget = {
     drop(props, monitor, component) {
         const droppedItem = monitor.getItem();
-        console.log("dropped on target", droppedItem);
         props.handleDrop(droppedItem.item, props.name);
     },
 };
