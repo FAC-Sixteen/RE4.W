@@ -4,7 +4,7 @@ import StyledBin from "./Bin.style";
 import TrashBin from "../../assets/TrashBin.png";
 import RecyclingBin from "../../assets/RecyclingBin.png";
 
-const Bin = ({ accept, onDrop, name }) => {
+const Bin = ({ accept, onDrop, name, correctBin, wrongBin }) => {
     const [{ isOver, canDrop }, drop] = useDrop({
         accept,
         drop: onDrop,
@@ -13,19 +13,16 @@ const Bin = ({ accept, onDrop, name }) => {
             canDrop: monitor.canDrop(),
         }),
     });
-    const isActive = isOver && canDrop;
+
     return (
         <StyledBin
             src={name === "recyclingBin" ? RecyclingBin : TrashBin}
+            name={name}
+            correctBin={correctBin}
+            wrongBin={wrongBin}
             ref={drop}
         ></StyledBin>
     );
 };
 
 export default Bin;
-
-// {isActive
-//     ? "Release to drop"
-//     : `This bin accepts ${
-//           name === "recyclingBin" ? "recycling" : "trash"
-//       }`}

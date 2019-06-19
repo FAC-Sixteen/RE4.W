@@ -4,9 +4,15 @@ import styledMain from "../main/Main.style";
 const GameFlex = styled(styledMain)`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 2em 0em;
+    margin-top: 20vh;
+    height: 80vh;
+
+    @media only screen and (max-width: 768px) {
+        margin-top: 10vh;
+        height: 90vh;
+    }
 `;
 
 const ItemContainer = styled.div`
@@ -24,6 +30,7 @@ const TopContainer = styled.div`
     display: flex;
     justify-content: space-around;
     width: 100vw;
+    margin: 1em 0em;
 `;
 
 const ScoreText = styled.p`
@@ -32,6 +39,7 @@ const ScoreText = styled.p`
     margin: 0 1em;
     padding: 0;
     width: 4em;
+    text-align: center;
     @media only screen and (max-width: 768px) {
         font-size: 1em;
     }
