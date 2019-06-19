@@ -11,7 +11,13 @@ import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 import Header from "../header/Header";
 import Main from "../main/Main";
-import { GameFlex, ItemContainer } from "./Game.style";
+import {
+    GameFlex,
+    ItemContainer,
+    TopContainer,
+    ScoreText,
+    ExplainText,
+} from "./Game.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
@@ -23,7 +29,7 @@ const Game = ({ data }) => {
 
     const handleImageLoad = () => {
         setImages(images.concat(true));
-        if (images.length === 9) setActive(true);
+        if (images.length === 5) setActive(true);
     };
     const handleImageError = () => {
         setImages(images.concat(false));
@@ -84,21 +90,13 @@ const Game = ({ data }) => {
             <Header text="Game" />
             <Main>
                 <GameFlex>
-                    <div>
-                        {bins.map(({ binName, accepts }, index) => {
-                            return (
-                                <Bin
-                                    accept={accepts}
-                                    onDrop={item => handleDrop(item, binName)}
-                                    key={index}
-                                    name={binName}
-                                />
-                            );
-                        })}
-                    </div>
-
-                    <p>Score: {score}</p>
-                    <p>Time: {time}</p>
+                    <TopContainer>
+                        <ScoreText>Score: {score}</ScoreText>
+                        <ExplainText>
+                            Drag and drop the trash into the right bin!
+                        </ExplainText>
+                        <ScoreText>Time: {time}</ScoreText>
+                    </TopContainer>
 
                     <ItemContainer>
                         {items.map((item, index) => {
@@ -112,6 +110,19 @@ const Game = ({ data }) => {
                             );
                         })}
                     </ItemContainer>
+
+                    <div>
+                        {bins.map(({ binName, accepts }, index) => {
+                            return (
+                                <Bin
+                                    accept={accepts}
+                                    onDrop={item => handleDrop(item, binName)}
+                                    key={index}
+                                    name={binName}
+                                />
+                            );
+                        })}
+                    </div>
                 </GameFlex>
 
                 <ReactModal
