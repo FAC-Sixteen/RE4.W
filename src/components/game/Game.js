@@ -11,10 +11,11 @@ import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
 import Header from "../header/Header";
 import Main from "../main/Main";
+import { GameFlex, ItemContainer } from "./Game.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(10);
+    const [time, setTime] = React.useState(300);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -79,37 +80,40 @@ const Game = ({ data }) => {
     );
 
     return (
-        <React.Fragment data-testid="game">
+        <div data-testid="game">
             <Header text="Game" />
             <Main>
-                <div>
-                    {bins.map(({ binName, accepts }, index) => {
-                        return (
-                            <Bin
-                                accept={accepts}
-                                onDrop={item => handleDrop(item, binName)}
-                                key={index}
-                                name={binName}
-                            />
-                        );
-                    })}
-                </div>
+                <GameFlex>
+                    <div>
+                        {bins.map(({ binName, accepts }, index) => {
+                            return (
+                                <Bin
+                                    accept={accepts}
+                                    onDrop={item => handleDrop(item, binName)}
+                                    key={index}
+                                    name={binName}
+                                />
+                            );
+                        })}
+                    </div>
 
-                <p>Score: {score}</p>
-                <p>Time: {time}</p>
+                    <p>Score: {score}</p>
+                    <p>Time: {time}</p>
 
-                <div>
-                    {items.map((item, index) => {
-                        return (
-                            <Item
-                                item={item}
-                                handleImageLoad={handleImageLoad}
-                                handleImageError={handleImageError}
-                                key={index}
-                            />
-                        );
-                    })}
-                </div>
+                    <ItemContainer>
+                        {items.map((item, index) => {
+                            return (
+                                <Item
+                                    item={item}
+                                    handleImageLoad={handleImageLoad}
+                                    handleImageError={handleImageError}
+                                    key={index}
+                                />
+                            );
+                        })}
+                    </ItemContainer>
+                </GameFlex>
+
                 <ReactModal
                     isOpen={showModal}
                     style={{
@@ -134,7 +138,7 @@ const Game = ({ data }) => {
                     </Link>
                 </ReactModal>
             </Main>
-        </React.Fragment>
+        </div>
     );
 };
 

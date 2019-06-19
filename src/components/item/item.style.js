@@ -1,18 +1,34 @@
 import styled from "styled-components";
 
 const DragItem = styled.img`
-    max-width: 100px;
     object-fit: contain;
-    width: 100px;
-    height: 100px;
+    width: 8em;
+    height: 8em;
     border: 1px dashed gray;
     backgroundcolor: white;
     padding: 0.5rem 1rem;
-    marginright: 1.5rem;
-    marginbottom: 1.5rem;
     cursor: move;
     float: left;
     opacity: ${props => props.opacity};
 `;
 
-export default DragItem;
+const ItemText = styled.p`
+    font-family: Bangers;
+    font-size: 1.5em;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 8em;
+`;
+
+const IndividualItem = styled.div`
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    marginright: 1.5rem;
+    marginbottom: 1.5rem;
+`;
+
+export { DragItem, ItemText, IndividualItem };
