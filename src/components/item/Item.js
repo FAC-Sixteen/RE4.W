@@ -10,19 +10,23 @@ const Item = ({ item, handleImageLoad, handleImageError }) => {
             opacity: monitor.isDragging() ? 0 : 1,
         }),
     });
-    return (
-        <DragPreview>
-            {item.dropped ? null : (
-                <DragItem
-                    ref={drag}
-                    src={item.Image}
-                    alt={item.itemName}
-                    opacity={opacity}
-                    onLoad={handleImageLoad}
-                    onError={handleImageError}
-                />
-            )}
-        </DragPreview>
+    return item.dropped ? null : (
+        <div>
+            <DragPreview
+                drag={drag}
+                item={item}
+                handleImageLoad={handleImageLoad}
+                handleImageError={handleImageError}
+            />
+            <DragItem
+                ref={drag}
+                src={item.Image}
+                alt={item.itemName}
+                opacity={opacity}
+                onLoad={handleImageLoad}
+                onError={handleImageError}
+            />
+        </div>
     );
 };
 

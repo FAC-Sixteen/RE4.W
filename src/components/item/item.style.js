@@ -13,6 +13,7 @@ const DragItem = styled.img`
     cursor: move;
     float: left;
     opacity: ${props => props.opacity};
+    transform: ${props => props.transform || props.transform};
 `;
 
 export default DragItem;

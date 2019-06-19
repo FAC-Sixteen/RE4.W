@@ -12,7 +12,7 @@ import formatData from "../../utils/formatData";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(10);
+    const [time, setTime] = React.useState(100000);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);

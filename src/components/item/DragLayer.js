@@ -14,12 +14,13 @@ const DragPreview = props => {
     const getLayerStyles = () => {
         const { sourceOffset } = props;
 
-        return {
-            transform: sourceOffset
-                ? `translate(${sourceOffset.x}px, ${sourceOffset.y}px)`
-                : "",
-        };
+        return sourceOffset
+            ? `translate(${sourceOffset.x}px, ${sourceOffset.y}px)`
+            : null;
     };
+
+    const transform = getLayerStyles();
+    console.log(transform);
 
     const { isDragging } = props;
     // if (!isDragging) {
@@ -27,9 +28,15 @@ const DragPreview = props => {
     // }
 
     return (
-        <div className="source-preview" style={getLayerStyles()}>
-            {props.children}
-        </div>
+        <DragItem
+            className="dragging"
+            ref={props.drag}
+            src={props.item.Image}
+            alt={props.item.itemName}
+            onLoad={props.handleImageLoad}
+            onError={props.handleImageError}
+            transform={transform}
+        />
     );
 };
 
