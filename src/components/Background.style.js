@@ -6,7 +6,7 @@ const Background = styled.div`
     background-repeat: repeat;
     background-size: cover;
     background-position: center center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     position: absolute;
     top: 0;

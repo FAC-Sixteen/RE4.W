@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledHeader = styled.header`
     width: 100vw;
-    height: 4rem;
+    height: 10vh;
     background-color: #fcc312;
     border-bottom: 0.5rem solid black;
     position: fixed;
@@ -19,10 +19,10 @@ const StyledContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100vw;
-    height: 8rem;
+    height: 20vh;
 
     @media only screen and (max-width: 768px) {
-        height: 4rem;
+        height: 10vh;
     }
 `;
 
@@ -42,7 +42,7 @@ const StyledLogo = styled.img`
 
     @media only screen and (max-width: 768px) {
         width: 6rem;
-        margin: 0em 1em;
+        margin: 0;
     }
 `;
 
@@ -54,7 +54,7 @@ const SuperheroContainer = styled.div`
 
     @media only screen and (max-width: 768px) {
         width: 3rem;
-        margin: 0em 1em;
+        margin: 0;
     }
 `;
 

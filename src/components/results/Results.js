@@ -12,9 +12,15 @@ import {
 } from "../factPage/FactPage.style";
 import { IndividualItem } from "../item/item.style";
 import { ItemContainer } from "../game/Game.style";
-import FactContainer from "./Results.style";
+import {
+    FactContainer,
+    ScoreContainer,
+    ScoreBubble,
+    ScoreText,
+} from "./Results.style";
 import WiseManSvg from "../avatars/wise-man.svg";
 import Background from "../Background.style";
+import ScoreBubbleImg from "../../assets/ScoreBubble.png";
 
 const Results = ({ location: { score, items } }) => {
     const incorrectItems = items.filter(item => !item.correct);
@@ -32,6 +38,10 @@ const Results = ({ location: { score, items } }) => {
             <Main>
                 <Background>
                     <StyledFactPage>
+                        <ScoreContainer>
+                            <ScoreText>Your score is {score}!</ScoreText>
+                            <ScoreBubble src={ScoreBubbleImg} />
+                        </ScoreContainer>
                         <WiseManContainer>
                             <WiseManText>
                                 oh no, you missed a few! Click on the item to
@@ -58,7 +68,6 @@ const Results = ({ location: { score, items } }) => {
                             ) : null}
                         </ItemContainer>
 
-                        <div>Your score is {score}!</div>
                         <Link to="/">
                             <SmallButton>Play Again</SmallButton>
                         </Link>
