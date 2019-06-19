@@ -30,5 +30,9 @@ const StyledLogoTitle = styled.img`
     margin-bottom: initial;
     margin-top: initial;
     padding-bottom: 4em;
+
+    @media only screen and (max-width: 768px) {
+        width: 16em;
+    }
 `;
 export { StyledHome, StyledLogo, StyledLogoTitle };
