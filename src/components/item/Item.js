@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import DragItem from "./item.style";
+import { DragItem, ItemText, IndividualItem } from "./item.style";
 
 const Item = ({ item, handleImageLoad, handleImageError }) => {
     const [{ opacity }, drag] = useDrag({
@@ -10,18 +10,21 @@ const Item = ({ item, handleImageLoad, handleImageError }) => {
         }),
     });
     return (
-        <div>
+        <React.Fragment>
             {item.dropped ? null : (
-                <DragItem
-                    ref={drag}
-                    src={item.Image}
-                    alt={item.itemName}
-                    opacity={opacity}
-                    onLoad={handleImageLoad}
-                    onError={handleImageError}
-                />
+                <IndividualItem>
+                    <DragItem
+                        ref={drag}
+                        src={item.Image}
+                        alt={item.itemName}
+                        opacity={opacity}
+                        onLoad={handleImageLoad}
+                        onError={handleImageError}
+                    />
+                    <ItemText>{item.Category}</ItemText>
+                </IndividualItem>
             )}
-        </div>
+        </React.Fragment>
     );
 };
 
