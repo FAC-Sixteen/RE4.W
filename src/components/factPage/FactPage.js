@@ -39,6 +39,7 @@ const FactPage = ({ location: { score, data } }) => {
                         to={{
                             pathname: "/results",
                             score: score,
+                            items: data,
                         }}
                     >
                         <LargeButton>See Your Results!</LargeButton>
