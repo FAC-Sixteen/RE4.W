@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 import fetchData from "../../utils/fetchData";
 
-import StyledHome from "./Home.style";
+import { StyledHome, StyledLogo } from "./Home.style";
 import { LargeButton } from "../button/Button";
+import Logo from "../../assets/RecyclingHeroesLogo.png";
 
 const Home = () => {
     const [data, setData] = React.useState(null);
@@ -18,6 +19,7 @@ const Home = () => {
     return (
         <React.Fragment>
             <StyledHome>
+                <StyledLogo src={Logo} />
                 <Link
                     to={{
                         pathname: "/game",

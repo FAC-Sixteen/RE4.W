@@ -10,12 +10,11 @@ import FactPage from "../components/factPage/FactPage";
 function App() {
     return (
         <Router>
-            <Main>
-                <Route exact path="/" component={Home} />
-                <Route path="/game" component={Game} />
-                <Route path="/factpage" component={FactPage} />
-                <Route path="/results" component={Results} />
-            </Main>
+            <Route exact path="/" component={Home} />
+            <Route path="/game" component={Game} />
+            <Route path="/factpage" component={FactPage} />
+            <Route path="/results" component={Results} />
+
         </Router>
     );
 }
