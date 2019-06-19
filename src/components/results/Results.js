@@ -1,18 +1,18 @@
 import React from "react";
-import DragItem from "../item/item.style";
+import { DragItem } from "../item/item.style";
 import Header from "../header/Header";
 import Main from "../main/Main";
 import { SmallButton } from "../button/Button";
 import { Link } from "react-router-dom";
 import {
     StyledFactPage,
-    FactBubble,
-    FactBubbleContainer,
-    FactBubbleFact,
     WiseManContainer,
     WiseMan,
     WiseManText,
 } from "../factPage/FactPage.style";
+import { IndividualItem } from "../item/item.style";
+import { ItemContainer } from "../game/Game.style";
+import FactContainer from "./Results.style";
 import WiseManSvg from "../avatars/wise-man.svg";
 
 const Results = ({ location: { score, items } }) => {
@@ -37,13 +37,23 @@ const Results = ({ location: { score, items } }) => {
                         </WiseManText>
                         <WiseMan src={WiseManSvg} />
                     </WiseManContainer>
-                    {incorrectItems.map((item, i) => (
-                        <div key={i} onClick={() => displayFact(i)}>
-                            <DragItem src={item.Image} alt={item.Category} />
-                            <p>{item.Category}</p>
-                        </div>
-                    ))}
-                    {display ? <p>{fact}</p> : null}
+                    <ItemContainer>
+                        {incorrectItems.map((item, i) => (
+                            <IndividualItem
+                                key={i}
+                                onClick={() => displayFact(i)}
+                            >
+                                <DragItem
+                                    src={item.Image}
+                                    alt={item.Category}
+                                />
+                                <p>{item.Category}</p>
+                            </IndividualItem>
+                        ))}
+
+                        {display ? <FactContainer>{fact}</FactContainer> : null}
+                    </ItemContainer>
+
                     <div>Your score is {score}!</div>
                     <Link to="/">
                         <SmallButton>Play Again</SmallButton>
