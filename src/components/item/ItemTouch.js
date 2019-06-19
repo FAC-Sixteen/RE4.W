@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { DragSource, useDrag } from "react-dnd";
+import { DragSource } from "react-dnd";
 import DragPreview from "../game/DragLayer";
-import DragItem from "./item.style";
 
 const dragSource = {
     beginDrag(props) {
@@ -20,13 +19,6 @@ const collect = (connect, monitor) => {
 
 const ItemTouch = props => {
     const { connectDragSource, item } = props;
-
-    // const [{ opacity }, drag] = useDrag({
-    //     item: item,
-    //     collect: monitor => ({
-    //         opacity: monitor.isDragging() ? 0 : 1,
-    //     }),
-    // });
 
     return connectDragSource(
         item.dropped ? null : (

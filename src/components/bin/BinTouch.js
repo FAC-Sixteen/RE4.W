@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { DropTarget, useDrop } from "react-dnd";
+import { DropTarget } from "react-dnd";
 import StyledBin from "./Bin.style";
 
 const dragTarget = {
