@@ -7,7 +7,7 @@ const dragTarget = {
     drop(props, monitor, component) {
         const droppedItem = monitor.getItem();
         console.log("dropped on target", droppedItem);
-        props.handleDrop(droppedItem, props.name);
+        props.handleDrop(droppedItem.item, props.name);
     },
 };
 
