@@ -152,8 +152,6 @@ const Game = ({ data }) => {
     );
 };
 
-const TouchGame = DragDropContext(TouchBackend({ enableMouseEvents: true }))(
-    Game
-);
+const TouchGame = DragDropContext(TouchBackend)(Game);
 
 export default TouchGame;
