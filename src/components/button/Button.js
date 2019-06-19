@@ -1,5 +1,9 @@
 import React from "react";
-import { StyledSmallButton, StyledLargeButton } from "./Button.style";
+import {
+    StyledSmallButton,
+    StyledLargeButton,
+    StyledInactiveButton,
+} from "./Button.style";
 
 const SmallButton = props => {
     return (
@@ -17,4 +21,8 @@ const LargeButton = props => {
     );
 };
 
-export { SmallButton, LargeButton };
+const InactiveButton = props => {
+    return <StyledInactiveButton>{props.children}</StyledInactiveButton>;
+};
+
+export { SmallButton, LargeButton, InactiveButton };

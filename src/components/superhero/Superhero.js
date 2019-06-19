@@ -3,7 +3,7 @@ import Ninja from "../avatars/Ninja";
 import Short from "../avatars/Short";
 import Man from "../avatars/Man";
 import Woman from "../avatars/Woman";
-import { ReactComponent as Wise } from "./avatars/wise-man.svg";
+import { ReactComponent as Wise } from "../avatars/wise-man.svg";
 
 const Superhero = ({ character }) => {
     const superHeroes = {

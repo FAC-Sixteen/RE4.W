@@ -1,34 +1,42 @@
 import React from "react";
-import { StyledHeader, StyledContainer, StyledText } from "./Header.style";
+import {
+    StyledHeader,
+    StyledContainer,
+    StyledText,
+    StyledLogo,
+    SuperheroContainer,
+} from "./Header.style";
 import Superhero from "../superhero/Superhero";
 import characterColours from "../../utils/character-colours";
+import { Link } from "react-router-dom";
 
 const Header = ({ text }) => {
-    const [ninja, setNinja] = React.useState({
+    const [ninja] = React.useState({
         hero: "ninja",
         colours: {
-            skin: characterColours.skin[0],
-            base: characterColours.base[0],
-            hair: characterColours.hair[0],
+            skin: characterColours.skin[1],
+            base: characterColours.base[1],
+            hair: characterColours.hair[1],
         },
     });
 
-    const handleSetNinja = () =>
-        setNinja({
-            hero: "short",
-            colours: {
-                skin: characterColours.skin[3],
-                base: characterColours.base[4],
-                hair: characterColours.hair[0],
-            },
-        });
+    const textFilepath = require(`../../assets/${text}.png`);
+    const logoFilepath = require("../../assets/RecyclingHeroesLogo.png");
 
-    const filepath = require(`../../assets/${text}.png`);
     return (
         <StyledHeader>
             <StyledContainer>
-                <StyledText src={filepath} />
-                <Superhero character={ninja} />
+                <Link
+                    to={{
+                        pathname: "/",
+                    }}
+                >
+                    <StyledLogo src={logoFilepath} />
+                </Link>
+                <StyledText src={textFilepath} />
+                <SuperheroContainer>
+                    <Superhero character={ninja} />
+                </SuperheroContainer>
             </StyledContainer>
         </StyledHeader>
     );

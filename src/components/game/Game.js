@@ -11,6 +11,8 @@ import BinTouch from "../bin/BinTouch";
 import ItemTouch from "../item/ItemTouch";
 import ItemTypes from "../../utils/ItemTypes";
 import formatData from "../../utils/formatData";
+import Header from "../header/Header";
+import Main from "../main/Main";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
@@ -80,57 +82,60 @@ const Game = ({ data }) => {
 
     return (
         <div data-testid="game">
-            <div>
-                {bins.map(({ binName, accepts }, index) => {
-                    return (
-                        <BinTouch
-                            accept={accepts}
-                            onDrop={item => handleDrop(item, binName)}
-                            key={index}
-                            name={binName}
-                        />
-                    );
-                })}
-            </div>
+            <Header text="Game" />
+            <Main>
+                <div>
+                    {bins.map(({ binName, accepts }, index) => {
+                        return (
+                            <BinTouch
+                                accept={accepts}
+                                onDrop={item => handleDrop(item, binName)}
+                                key={index}
+                                name={binName}
+                            />
+                        );
+                    })}
+                </div>
 
-            <p>Score: {score}</p>
-            <p>Time: {time}</p>
+                <p>Score: {score}</p>
+                <p>Time: {time}</p>
 
-            <div>
-                {items.map((item, index) => {
-                    return (
-                        <ItemTouch
-                            item={item}
-                            handleImageLoad={handleImageLoad}
-                            handleImageError={handleImageError}
-                            key={index}
-                        />
-                    );
-                })}
-            </div>
-            <ReactModal
-                isOpen={showModal}
-                style={{
-                    overlay: {
-                        width: "50vw",
-                        height: "50vh",
-                        margin: "auto",
-                        backgroundColor: "green",
-                    },
-                    content: { border: "none" },
-                }}
-            >
-                GAME OVER GOOD JOB!{" "}
-                <Link
-                    to={{
-                        pathname: "/factpage",
-                        data: items,
-                        score: score,
+                <div>
+                    {items.map((item, index) => {
+                        return (
+                            <ItemTouch
+                                item={item}
+                                handleImageLoad={handleImageLoad}
+                                handleImageError={handleImageError}
+                                key={index}
+                            />
+                        );
+                    })}
+                </div>
+                <ReactModal
+                    isOpen={showModal}
+                    style={{
+                        overlay: {
+                            width: "50vw",
+                            height: "50vh",
+                            margin: "auto",
+                            backgroundColor: "green",
+                        },
+                        content: { border: "none" },
                     }}
                 >
-                    End Game
-                </Link>
-            </ReactModal>
+                    GAME OVER GOOD JOB!{" "}
+                    <Link
+                        to={{
+                            pathname: "/factpage",
+                            data: items,
+                            score: score,
+                        }}
+                    >
+                        End Game
+                    </Link>
+                </ReactModal>
+            </Main>
         </div>
     );
 };
