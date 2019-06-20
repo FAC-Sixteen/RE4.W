@@ -8,7 +8,6 @@ import RecyclingBin from "../../assets/RecyclingBin.png";
 const dragTarget = {
     drop(props, monitor, component) {
         const droppedItem = monitor.getItem();
-        console.log("dropped", droppedItem);
         props.handleDrop(droppedItem.item, props.name);
     },
 };
@@ -29,7 +28,6 @@ const BinTouch = props => {
         wrongBin,
         sourceOffset,
     } = props;
-    console.log(sourceOffset);
 
     const [dragStart, setDragStart] = React.useState(0);
 
