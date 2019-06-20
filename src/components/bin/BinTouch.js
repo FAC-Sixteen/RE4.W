@@ -8,6 +8,7 @@ import RecyclingBin from "../../assets/RecyclingBin.png";
 const dragTarget = {
     drop(props, monitor, component) {
         const droppedItem = monitor.getItem();
+        console.log("dropped", droppedItem);
         props.handleDrop(droppedItem.item, props.name);
     },
 };
@@ -16,17 +17,16 @@ const collect = (connect, monitor) => {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
-        canDrop: monitor.canDrop(),
     };
 };
 
 const BinTouch = props => {
     const { connectDropTarget, name, correctBin, wrongBin } = props;
-
     return connectDropTarget(
         <div>
             <StyledBin
                 src={name === "recyclingBin" ? RecyclingBin : TrashBin}
+                alt={name === "recyclingBin" ? "Recycling Bin" : "Trash Bin"}
                 name={name}
                 correctBin={correctBin}
                 wrongBin={wrongBin}

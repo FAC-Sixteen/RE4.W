@@ -23,7 +23,6 @@ const DragPreview = props => {
     }, [sourceOffset, dragStart]);
 
     const getLayerStyles = () => {
-        console.log(sourceOffset, dragStart);
         return {
             transform: sourceOffset
                 ? `translate(${sourceOffset.x -
@@ -33,7 +32,6 @@ const DragPreview = props => {
     };
 
     const transform = getLayerStyles();
-    console.log(transform);
 
     const { isDragging } = props;
     if (isDragging) {
