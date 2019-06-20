@@ -4,7 +4,6 @@ import DesktopGame from "./Game";
 import TouchGame from "./GameTouch";
 
 const Game = ({ location: { data } }) => {
-    console.log(isTouchDevice());
     return isTouchDevice() ? (
         <TouchGame data={data} />
     ) : (

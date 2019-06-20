@@ -13,6 +13,7 @@ import {
     GameFlex,
     ItemContainer,
     TopContainer,
+    BinContainer,
     ScoreText,
     ExplainText,
     Overlay,
@@ -124,7 +125,7 @@ const Game = ({ data }) => {
                         })}
                     </ItemContainer>
 
-                    <div>
+                    <BinContainer>
                         {bins.map(({ binName, accepts }, index) => {
                             return (
                                 <Bin
@@ -137,7 +138,7 @@ const Game = ({ data }) => {
                                 />
                             );
                         })}
-                    </div>
+                    </BinContainer>
                 </GameFlex>
 
                 <ReactModal

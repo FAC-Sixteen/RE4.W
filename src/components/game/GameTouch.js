@@ -15,6 +15,7 @@ import {
     TopContainer,
     ScoreText,
     ExplainText,
+    BinContainer,
     Overlay,
 } from "./Game.style";
 import Background from "../Background.style";
@@ -124,7 +125,7 @@ const Game = ({ data }) => {
                         })}
                     </ItemContainer>
 
-                    <div>
+                    <BinContainer>
                         {bins.map(({ binName, accepts }, index) => {
                             return (
                                 <BinTouch
@@ -137,7 +138,7 @@ const Game = ({ data }) => {
                                 />
                             );
                         })}
-                    </div>
+                    </BinContainer>
                 </GameFlex>
 
                 <ReactModal
