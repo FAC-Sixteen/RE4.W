@@ -22,6 +22,9 @@ const Home = () => {
                     <StyledLogo src={Logo} />
                     <StyledLogoTitle src={LogoTitle} />
                     <InactiveButton>Loading...</InactiveButton>
+                    <Link to={{ pathname: "/credits" }}>
+                        <LargeButton>Credits</LargeButton>
+                    </Link>
                 </StyledHome>
             </React.Fragment>
         );
@@ -38,6 +41,9 @@ const Home = () => {
                     }}
                 >
                     <LargeButton>Start Game</LargeButton>
+                </Link>
+                <Link to={{ pathname: "/credits" }}>
+                    <LargeButton>Credits</LargeButton>
                 </Link>
             </StyledHome>
         </React.Fragment>
