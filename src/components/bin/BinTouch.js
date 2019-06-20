@@ -17,14 +17,42 @@ const collect = (connect, monitor) => {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
+        sourceOffset: monitor.getSourceClientOffset(),
     };
 };
 
 const BinTouch = props => {
-    const { connectDropTarget, name, correctBin, wrongBin } = props;
+    const {
+        connectDropTarget,
+        name,
+        correctBin,
+        wrongBin,
+        sourceOffset,
+    } = props;
+    console.log(sourceOffset);
+
+    const [dragStart, setDragStart] = React.useState(0);
+
+    React.useEffect(() => {
+        if (dragStart === 0 && sourceOffset !== null) {
+            setDragStart(sourceOffset);
+        } else if (sourceOffset === null) {
+            setDragStart(0);
+        }
+    }, [sourceOffset, dragStart]);
+
+    const getLayerStyles = () => {
+        return {
+            transform: sourceOffset ? `translate(${-0}px, ${-0}px)` : "",
+        };
+    };
+
+    const transform = getLayerStyles();
+
     return connectDropTarget(
         <div>
             <StyledBin
+                style={transform}
                 src={name === "recyclingBin" ? RecyclingBin : TrashBin}
                 alt={name === "recyclingBin" ? "Recycling Bin" : "Trash Bin"}
                 name={name}
