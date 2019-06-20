@@ -24,10 +24,16 @@ const StyledBin = styled.img`
         }
     }};
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-device-width: 480px) {
         height: 6rem;
         width: 6rem;
         padding: 0.5rem 0rem;
+    }
+
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) {
+        height: 10rem;
+        width: 10rem;
+        padding: 1rem 0rem;
     }
 `;
 

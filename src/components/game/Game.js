@@ -13,6 +13,7 @@ import {
     GameFlex,
     ItemContainer,
     TopContainer,
+    BinContainer,
     ScoreText,
     ExplainText,
 } from "./Game.style";
@@ -20,7 +21,7 @@ import BackGround from "../Background.style";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(20);
+    const [time, setTime] = React.useState(60);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -120,7 +121,7 @@ const Game = ({ data }) => {
                         })}
                     </ItemContainer>
 
-                    <div>
+                    <BinContainer>
                         {bins.map(({ binName, accepts }, index) => {
                             return (
                                 <Bin
@@ -133,7 +134,7 @@ const Game = ({ data }) => {
                                 />
                             );
                         })}
-                    </div>
+                    </BinContainer>
                 </GameFlex>
 
                 <ReactModal
