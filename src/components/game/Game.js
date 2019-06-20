@@ -17,6 +17,8 @@ import {
     ExplainText,
 } from "./Game.style";
 import BackGround from "../Background.style";
+import { SmallButton } from "../button/Button";
+import Bubble from "../../assets/ScoreBubble.png";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
@@ -140,31 +142,36 @@ const Game = ({ data }) => {
                     isOpen={showModal}
                     style={{
                         overlay: {
-                            width: "50vw",
-                            height: "40vh",
-                            margin: "auto",
-                            display: "flex",
-                            "align-items": "center",
-                            backgroundColor: "#F9C332",
+                            width: "100vw",
+                            height: "100vh",
+                            backgroundColor: "rgba(225,225,225,0.5)",
+                            position: "relative",
                         },
-                        content: { border: "none" },
+                        content: {
+                            width: "62vw",
+                            height: "50vw",
+                            border: "none",
+                            backgroundImage: `url(${Bubble})`,
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundColor: "transparent",
+                            margin: "auto",
+                        },
                     }}
                 >
                     <ExplainText>
-                        GAME OVER <br></br> <br></br>
-                        <br></br> GOOD JOB! <br></br>
-                        <br></br>
-                        <br></br>
+                        GAME OVER<br></br>GOOD JOB!
+                        <Link
+                            to={{
+                                pathname: "/factpage",
+                                data: items,
+                                score: score,
+                            }}
+                        >
+                            <SmallButton>End Game</SmallButton>
+                            {/* <ExplainText>End Game</ExplainText> */}
+                        </Link>
                     </ExplainText>
-                    <Link
-                        to={{
-                            pathname: "/factpage",
-                            data: items,
-                            score: score,
-                        }}
-                    >
-                        <ExplainText>End Game</ExplainText>
-                    </Link>
                 </ReactModal>
             </BackGround>
         </div>
