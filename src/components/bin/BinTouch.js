@@ -16,17 +16,33 @@ const collect = (connect, monitor) => {
     return {
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
-        canDrop: monitor.canDrop(),
+        sourceOffset: monitor.getSourceClientOffset(),
     };
 };
 
 const BinTouch = props => {
-    const { connectDropTarget, name, correctBin, wrongBin } = props;
+    const {
+        connectDropTarget,
+        name,
+        correctBin,
+        wrongBin,
+        sourceOffset,
+    } = props;
+
+    const getLayerStyles = () => {
+        return {
+            transform: sourceOffset ? `translate(${-0}px, ${-0}px)` : "",
+        };
+    };
+
+    const transform = getLayerStyles();
 
     return connectDropTarget(
         <div>
             <StyledBin
+                style={transform}
                 src={name === "recyclingBin" ? RecyclingBin : TrashBin}
+                alt={name === "recyclingBin" ? "Recycling Bin" : "Trash Bin"}
                 name={name}
                 correctBin={correctBin}
                 wrongBin={wrongBin}

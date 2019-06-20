@@ -11,12 +11,22 @@ const collect = monitor => {
 };
 
 const DragPreview = props => {
-    const getLayerStyles = () => {
-        const { sourceOffset } = props;
+    const [dragStart, setDragStart] = React.useState(0);
+    const { sourceOffset } = props;
 
+    React.useEffect(() => {
+        if (dragStart === 0 && sourceOffset !== null) {
+            setDragStart(sourceOffset);
+        } else if (sourceOffset === null) {
+            setDragStart(0);
+        }
+    }, [sourceOffset, dragStart]);
+
+    const getLayerStyles = () => {
         return {
             transform: sourceOffset
-                ? `translate(${sourceOffset.x}px, ${sourceOffset.y}px)`
+                ? `translate(${sourceOffset.x -
+                      dragStart.x}px, ${sourceOffset.y - dragStart.y}px)`
                 : "",
         };
     };
