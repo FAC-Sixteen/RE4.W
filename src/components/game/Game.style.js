@@ -81,14 +81,11 @@ const Overlay = styled.div`
     left: 0;
 `;
 
-
 export {
     GameFlex,
     ItemContainer,
     TopContainer,
     BinContainer,
-    ScoreText,
-    ExplainText,
     ScoreText,
     ExplainText,
     Overlay,

@@ -15,11 +15,8 @@ import {
     TopContainer,
     ScoreText,
     ExplainText,
-
     BinContainer,
-
     Overlay,
-
 } from "./Game.style";
 import Background from "../Background.style";
 
