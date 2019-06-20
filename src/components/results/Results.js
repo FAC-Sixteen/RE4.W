@@ -31,7 +31,7 @@ const Results = ({ location: { score, items } }) => {
 
     const displayFact = i => {
         setDisplay(!display);
-        setTip(incorrectItems[i].Tip);
+        setTip(() => (win ? correctItems[i].Tip : incorrectItems[i].Tip));
     };
 
     return (
