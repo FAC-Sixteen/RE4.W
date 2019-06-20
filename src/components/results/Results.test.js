@@ -109,21 +109,21 @@ const loseProps = {
 };
 
 test("Win case", () => {
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
         <MemoryRouter>
             <Results location={winProps} />
         </MemoryRouter>
     );
-    getByText("Wow, full marks! Click on the item to see some recycling tips.");
+    getByTestId("result-text");
+    // getByText("Wow, full marks! Click on the item to see some recycling tips.");
 });
 
 test("Lose case", () => {
-    const { getByText } = render(
+    const { getByText, getByTestId } = render(
         <MemoryRouter>
             <Results location={loseProps} />
         </MemoryRouter>
     );
-    getByText(
-        "Oh no, you missed a few! Click on the item to see some recycling tips."
-    );
+    getByTestId("result-text");
+    // getByText("Oh no, you missed a few! Click on the item to see some recycling tips.")
 });

@@ -24,6 +24,11 @@ import ScoreBubbleImg from "../../assets/ScoreBubble.png";
 
 const Results = ({ location: { score, items } }) => {
     const incorrectItems = items.filter(item => !item.correct);
+    console.log(
+        incorrectItems.length > 0
+            ? "Oh no, you missed a few!"
+            : "Wow, full marks!"
+    );
     const [display, setDisplay] = React.useState(false);
     const [fact, setFact] = React.useState("");
 
@@ -43,8 +48,8 @@ const Results = ({ location: { score, items } }) => {
                             <ScoreBubble src={ScoreBubbleImg} />
                         </ScoreContainer>
                         <WiseManContainer>
-                            <WiseManText>
-                                {incorrectItems > 0
+                            <WiseManText data-testid="result-text">
+                                {incorrectItems.length > 0
                                     ? "Oh no, you missed a few!"
                                     : "Wow, full marks!"}{" "}
                                 Click on the item to see some recycling tips.
