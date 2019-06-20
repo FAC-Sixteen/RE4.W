@@ -21,7 +21,8 @@ const StyledCreditsPage = styled.div`
 `;
 
 const CreditText = styled.div`
-    width: 60vw;
+    width: 50vw;
+    line-height: 2em;
 `;
 
 const CreditLink = styled.a`
@@ -29,6 +30,7 @@ const CreditLink = styled.a`
     background-color: white;
     text-decoration: none;
     color: black;
+    padding: 0.2em;
 `;
 
 export { StyledCreditsPage, CreditLink, CreditText };
