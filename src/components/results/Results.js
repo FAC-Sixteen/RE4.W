@@ -25,11 +25,11 @@ import ScoreBubbleImg from "../../assets/ScoreBubble.png";
 const Results = ({ location: { score, items } }) => {
     const incorrectItems = items.filter(item => !item.correct);
     const [display, setDisplay] = React.useState(false);
-    const [fact, setFact] = React.useState("");
+    const [tip, setTip] = React.useState("");
 
     const displayFact = i => {
         setDisplay(!display);
-        setFact(incorrectItems[i].Fact);
+        setTip(incorrectItems[i].Tip);
     };
 
     return (
@@ -64,7 +64,7 @@ const Results = ({ location: { score, items } }) => {
                             ))}
 
                             {display ? (
-                                <FactContainer>{fact}</FactContainer>
+                                <FactContainer>{tip}</FactContainer>
                             ) : null}
                         </ItemContainer>
 
