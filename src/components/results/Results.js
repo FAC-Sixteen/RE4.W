@@ -44,8 +44,10 @@ const Results = ({ location: { score, items } }) => {
                         </ScoreContainer>
                         <WiseManContainer>
                             <WiseManText>
-                                oh no, you missed a few! Click on the item to
-                                see some recycling tips.
+                                {incorrectItems > 0
+                                    ? "Oh no, you missed a few!"
+                                    : "Wow, full marks!"}{" "}
+                                Click on the item to see some recycling tips.
                             </WiseManText>
                             <WiseMan src={WiseManSvg} />
                         </WiseManContainer>
