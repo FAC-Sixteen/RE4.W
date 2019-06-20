@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Redirect,
+    Link,
+} from "react-router-dom";
 
 import fetchData from "../utils/fetchData";
 
@@ -7,11 +12,14 @@ import Game from "../components/game/GameContainer";
 import Home from "../components/home/Home";
 import Results from "../components/results/Results";
 import FactPage from "../components/factPage/FactPage";
+import Credits from "../components/creditsPage/CreditsPage";
 
 import {
     StyledHome,
     StyledLogo,
     StyledLogoTitle,
+    EndCredits,
+    HomeBackground,
 } from "../components/home/Home.style";
 import { InactiveButton } from "../components/button/Button";
 import Logo from "../assets/RecyclingHeroesLogo.png";
@@ -27,11 +35,18 @@ function App() {
     if (!data)
         return (
             <React.Fragment>
-                <StyledHome>
-                    <StyledLogo src={Logo} />
-                    <StyledLogoTitle src={LogoTitle} />
-                    <InactiveButton>Loading...</InactiveButton>
-                </StyledHome>
+                <HomeBackground>
+                    <StyledHome>
+                        <StyledLogo src={Logo} />
+                        <StyledLogoTitle src={LogoTitle} />
+                        <InactiveButton>Loading...</InactiveButton>
+                    </StyledHome>
+                    <Router>
+                        <Link to={{ pathname: "/credits" }}>
+                            <EndCredits>Credits</EndCredits>
+                        </Link>
+                    </Router>
+                </HomeBackground>
             </React.Fragment>
         );
     return (
@@ -61,6 +76,7 @@ function App() {
                     )
                 }
             />
+            <Route path="/credits" component={Credits} />
         </Router>
     );
 }

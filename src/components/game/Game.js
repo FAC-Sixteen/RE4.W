@@ -13,8 +13,10 @@ import {
     GameFlex,
     ItemContainer,
     TopContainer,
+    BinContainer,
     ScoreText,
     ExplainText,
+    Overlay,
 } from "./Game.style";
 import BackGround from "../Background.style";
 
@@ -92,6 +94,7 @@ const Game = ({ data }) => {
         <div data-testid="game">
             <Header text="Game" />
             <BackGround>
+                {active === false ? <Overlay /> : null}
                 <GameFlex>
                     <TopContainer>
                         <ScoreText>
@@ -99,7 +102,9 @@ const Game = ({ data }) => {
                             {score}
                         </ScoreText>
                         <ExplainText>
-                            Drag and drop the trash into the right bin!
+                            {active === false
+                                ? "Loading..."
+                                : "Drag and drop the trash into the right bin!"}
                         </ExplainText>
                         <ScoreText>
                             Time:<br></br>
@@ -120,7 +125,7 @@ const Game = ({ data }) => {
                         })}
                     </ItemContainer>
 
-                    <div>
+                    <BinContainer>
                         {bins.map(({ binName, accepts }, index) => {
                             return (
                                 <Bin
@@ -133,7 +138,7 @@ const Game = ({ data }) => {
                                 />
                             );
                         })}
-                    </div>
+                    </BinContainer>
                 </GameFlex>
 
                 <ReactModal
