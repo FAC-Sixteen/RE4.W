@@ -54,6 +54,11 @@ const ExplainText = styled.p`
     margin: 0;
     padding: 0;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     @media only screen and (max-device-width: 480px) {
         font-size: 1em;
     }
