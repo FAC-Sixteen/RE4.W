@@ -15,7 +15,11 @@ import {
     TopContainer,
     ScoreText,
     ExplainText,
+
     BinContainer,
+
+    Overlay,
+
 } from "./Game.style";
 import Background from "../Background.style";
 
@@ -93,6 +97,7 @@ const Game = ({ data }) => {
         <div data-testid="game">
             <Header text="Game" />
             <Background>
+                {active === false ? <Overlay /> : null}
                 <GameFlex>
                     <TopContainer>
                         <ScoreText>
@@ -100,7 +105,9 @@ const Game = ({ data }) => {
                             {score}
                         </ScoreText>
                         <ExplainText>
-                            Drag and drop the trash into the right bin!
+                            {active === false
+                                ? "Loading..."
+                                : "Drag and drop the trash into the right bin!"}
                         </ExplainText>
                         <ScoreText>
                             Time:<br></br>

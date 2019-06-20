@@ -70,6 +70,18 @@ const BinContainer = styled.div`
     height: auto;
 `;
 
+const Overlay = styled.div`
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: white;
+    opacity: 0.5;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+`;
+
+
 export {
     GameFlex,
     ItemContainer,
@@ -77,4 +89,7 @@ export {
     BinContainer,
     ScoreText,
     ExplainText,
+    ScoreText,
+    ExplainText,
+    Overlay,
 };

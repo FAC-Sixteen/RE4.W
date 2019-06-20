@@ -24,6 +24,8 @@ import ScoreBubbleImg from "../../assets/ScoreBubble.png";
 
 const Results = ({ location: { score, items } }) => {
     const incorrectItems = items.filter(item => !item.correct);
+    const correctItems = items.filter(item => item.correct);
+    const win = incorrectItems.length === 0;
     const [display, setDisplay] = React.useState(false);
     const [fact, setFact] = React.useState("");
 
@@ -43,25 +45,47 @@ const Results = ({ location: { score, items } }) => {
                             <ScoreBubble src={ScoreBubbleImg} />
                         </ScoreContainer>
                         <WiseManContainer>
-                            <WiseManText>
-                                oh no, you missed a few! Click on the item to
-                                see some recycling tips.
-                            </WiseManText>
+                            {win ? (
+                                <WiseManText data-testid="result-text-win">
+                                    Wow, full marks! Click on the item to see
+                                    some recycling tips.
+                                </WiseManText>
+                            ) : (
+                                <WiseManText data-testid="result-text-lose">
+                                    Oh no, you missed a few! Click on the item
+                                    to see some recycling tips.
+                                </WiseManText>
+                            )}
                             <WiseMan src={WiseManSvg} />
                         </WiseManContainer>
                         <ItemContainer>
-                            {incorrectItems.map((item, i) => (
-                                <IndividualItem
-                                    key={i}
-                                    onClick={() => displayFact(i)}
-                                >
-                                    <DragItem
-                                        src={item.Image}
-                                        alt={item.Category}
-                                    />
-                                    <p>{item.Category}</p>
-                                </IndividualItem>
-                            ))}
+                            {win
+                                ? correctItems.map((item, i) => (
+                                      <IndividualItem
+                                          key={i}
+                                          onClick={() => displayFact(i)}
+                                          data-testid="item-win"
+                                      >
+                                          <DragItem
+                                              src={item.Image}
+                                              alt={item.Category}
+                                          />
+                                          <p>{item.Category}</p>
+                                      </IndividualItem>
+                                  ))
+                                : incorrectItems.map((item, i) => (
+                                      <IndividualItem
+                                          key={i}
+                                          onClick={() => displayFact(i)}
+                                          data-testid="item-lose"
+                                      >
+                                          <DragItem
+                                              src={item.Image}
+                                              alt={item.Category}
+                                          />
+                                          <p>{item.Category}</p>
+                                      </IndividualItem>
+                                  ))}
 
                             {display ? (
                                 <FactContainer>{fact}</FactContainer>
