@@ -92,7 +92,7 @@ const Results = ({ location: { score, items } }) => {
                             ) : null}
                         </ItemContainer>
 
-                        <Link to="/">
+                        <Link to="/game">
                             <SmallButton>Play Again</SmallButton>
                         </Link>
                     </StyledFactPage>

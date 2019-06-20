@@ -17,9 +17,9 @@ const CreditsPage = () => {
                             Freepik
                         </CreditLink>{" "}
                         from{" "}
-                        <CreditLink href="www.flaticons.com">
+                        <CreditLink href="https://www.flaticon.com">
                             {" "}
-                            www.flaticons.com
+                            www.flaticon.com
                         </CreditLink>
                     </CreditText>
                 </StyledCreditsPage>
