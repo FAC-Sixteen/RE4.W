@@ -27,11 +27,11 @@ const Results = ({ location: { score, items } }) => {
     const correctItems = items.filter(item => item.correct);
     const win = incorrectItems.length === 0;
     const [display, setDisplay] = React.useState(false);
-    const [fact, setFact] = React.useState("");
+    const [tip, setTip] = React.useState("");
 
     const displayFact = i => {
         setDisplay(!display);
-        setFact(incorrectItems[i].Fact);
+        setTip(incorrectItems[i].Tip);
     };
 
     return (
@@ -88,7 +88,7 @@ const Results = ({ location: { score, items } }) => {
                                   ))}
 
                             {display ? (
-                                <FactContainer>{fact}</FactContainer>
+                                <FactContainer>{tip}</FactContainer>
                             ) : null}
                         </ItemContainer>
 
