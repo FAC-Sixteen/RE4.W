@@ -13,13 +13,18 @@ import {
     GameFlex,
     ItemContainer,
     TopContainer,
+    BinContainer,
     ScoreText,
     ExplainText,
+    Overlay,
 } from "./Game.style";
+import BackGround from "../Background.style";
+import { SmallButton } from "../button/Button";
+import Bubble from "../../assets/ScoreBubble.png";
 
 const Game = ({ data }) => {
     const [score, setScore] = React.useState(0);
-    const [time, setTime] = React.useState(30);
+    const [time, setTime] = React.useState(20);
     const [items, setItems] = React.useState(formatData(data));
     const [showModal, setShowModal] = React.useState(false);
     const [active, setActive] = React.useState(false);
@@ -90,80 +95,90 @@ const Game = ({ data }) => {
     return (
         <div data-testid="game">
             <Header text="Game" />
-            <GameFlex>
-                <TopContainer>
-                    <ScoreText>
-                        Score:<br></br>
-                        {score}
-                    </ScoreText>
-                    <ExplainText>
-                        Drag and drop the trash into the right bin!
-                    </ExplainText>
-                    <ScoreText>
-                        Time:<br></br>
-                        {time}
-                    </ScoreText>
-                </TopContainer>
+            <BackGround>
+                {active === false ? <Overlay /> : null}
+                <GameFlex>
+                    <TopContainer>
+                        <ScoreText>
+                            Score:<br></br>
+                            {score}
+                        </ScoreText>
+                        <ExplainText>
+                            {active === false
+                                ? "Loading..."
+                                : "Drag and drop the trash into the right bin!"}
+                        </ExplainText>
+                        <ScoreText>
+                            Time:<br></br>
+                            {time}
+                        </ScoreText>
+                    </TopContainer>
 
-                <ItemContainer>
-                    {items.map((item, index) => {
-                        return (
-                            <Item
-                                item={item}
-                                handleImageLoad={handleImageLoad}
-                                handleImageError={handleImageError}
-                                key={index}
-                            />
-                        );
-                    })}
-                </ItemContainer>
+                    <ItemContainer>
+                        {items.map((item, index) => {
+                            return (
+                                <Item
+                                    item={item}
+                                    handleImageLoad={handleImageLoad}
+                                    handleImageError={handleImageError}
+                                    key={index}
+                                />
+                            );
+                        })}
+                    </ItemContainer>
 
-                <div>
-                    {bins.map(({ binName, accepts }, index) => {
-                        return (
-                            <Bin
-                                accept={accepts}
-                                onDrop={item => handleDrop(item, binName)}
-                                correctBin={correctBin}
-                                wrongBin={wrongBin}
-                                key={index}
-                                name={binName}
-                            />
-                        );
-                    })}
-                </div>
-            </GameFlex>
+                    <BinContainer>
+                        {bins.map(({ binName, accepts }, index) => {
+                            return (
+                                <Bin
+                                    accept={accepts}
+                                    onDrop={item => handleDrop(item, binName)}
+                                    correctBin={correctBin}
+                                    wrongBin={wrongBin}
+                                    key={index}
+                                    name={binName}
+                                />
+                            );
+                        })}
+                    </BinContainer>
+                </GameFlex>
 
-            <ReactModal
-                isOpen={showModal}
-                style={{
-                    overlay: {
-                        width: "50vw",
-                        height: "40vh",
-                        margin: "auto",
-                        display: "flex",
-                        "align-items": "center",
-                        backgroundColor: "#F9C332",
-                    },
-                    content: { border: "none" },
-                }}
-            >
-                <ExplainText>
-                    GAME OVER <br></br> <br></br>
-                    <br></br> GOOD JOB! <br></br>
-                    <br></br>
-                    <br></br>
-                </ExplainText>
-                <Link
-                    to={{
-                        pathname: "/factpage",
-                        data: items,
-                        score: score,
+                <ReactModal
+                    isOpen={showModal}
+                    style={{
+                        overlay: {
+                            width: "100vw",
+                            height: "100vh",
+                            backgroundColor: "rgba(225,225,225,0.5)",
+                            position: "relative",
+                        },
+                        content: {
+                            width: "62vw",
+                            height: "50vw",
+                            border: "none",
+                            backgroundImage: `url(${Bubble})`,
+                            backgroundSize: "cover",
+                            backgroundRepeat: "no-repeat",
+                            backgroundColor: "transparent",
+                            margin: "auto",
+                        },
                     }}
                 >
-                    <ExplainText>End Game</ExplainText>
-                </Link>
-            </ReactModal>
+                    <ExplainText>
+                        GAME OVER<br></br>GOOD JOB!
+                        <Link
+                            to={{
+                                pathname: "/factpage",
+                                data: items,
+                                score: score,
+                            }}
+                        >
+                            <SmallButton>End Game</SmallButton>
+                            {/* <ExplainText>End Game</ExplainText> */}
+                        </Link>
+                    </ExplainText>
+                </ReactModal>
+            </BackGround>
         </div>
     );
 };

@@ -4,16 +4,19 @@ const DragItem = styled.img`
     object-fit: contain;
     width: 6em;
     height: 6em;
-    backgroundcolor: white;
     padding: 0.5rem 1rem;
     cursor: move;
     float: left;
     opacity: ${props => props.opacity};
     transform: ${props => props.transform || props.transform};
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-device-width: 480px) {
         width: 5rem;
         height: 4rem;
         padding: 0.25rem 0.5rem;
+    }
+    @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) {
+        width: 10rem;
+        height: 10rem;
     }
 `;
 
@@ -23,8 +26,7 @@ const ItemText = styled.p`
     text-align: center;
     margin: 0;
     padding: 0;
-    width: 4em;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-device-width: 480px) {
         font-size: 0.8em;
     }
 `;
@@ -36,8 +38,10 @@ const IndividualItem = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-device-width: 480px) {
         margin: 0 0.5em;
+    }
+    @media only screen and (max-device-width: 768px) {
     }
 `;
 
