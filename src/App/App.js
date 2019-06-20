@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 import fetchData from "../utils/fetchData";
 
@@ -41,8 +41,26 @@ function App() {
                 path="/game"
                 render={props => <Game {...props} data={data} />}
             />
-            <Route path="/factpage" component={FactPage} />
-            <Route path="/results" component={Results} />
+            <Route
+                path="/factpage"
+                render={props =>
+                    !props.location.score ? (
+                        <Redirect to="/" />
+                    ) : (
+                        <FactPage {...props} />
+                    )
+                }
+            />
+            <Route
+                path="/results"
+                render={props =>
+                    !props.location.score ? (
+                        <Redirect to="/" />
+                    ) : (
+                        <Results {...props} />
+                    )
+                }
+            />
         </Router>
     );
 }
