@@ -29,16 +29,6 @@ const BinTouch = props => {
         sourceOffset,
     } = props;
 
-    const [dragStart, setDragStart] = React.useState(0);
-
-    React.useEffect(() => {
-        if (dragStart === 0 && sourceOffset !== null) {
-            setDragStart(sourceOffset);
-        } else if (sourceOffset === null) {
-            setDragStart(0);
-        }
-    }, [sourceOffset, dragStart]);
-
     const getLayerStyles = () => {
         return {
             transform: sourceOffset ? `translate(${-0}px, ${-0}px)` : "",
