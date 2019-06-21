@@ -15,7 +15,7 @@ const ScoreContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 6rem;
-    @media only screen and (max-width: 1000px) {
+    @media only screen and (max-width: 768px) {
         width: 90vw;
         margin-top: 8rem;
         margin-bottom: 0;
